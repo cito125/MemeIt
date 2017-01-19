@@ -21,7 +21,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initialize();
+    }
 
+
+    private void initialize() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tablayout = (TabLayout) findViewById(R.id.tab_layout);
         pager = (ViewPager) findViewById(R.id.viewpager);
