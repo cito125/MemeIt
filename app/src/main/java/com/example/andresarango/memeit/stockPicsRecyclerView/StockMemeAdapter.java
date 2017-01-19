@@ -1,10 +1,11 @@
-package com.example.andresarango.memeit;
+package com.example.andresarango.memeit.stockPicsRecyclerView;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.andresarango.memeit.R;
 import com.example.andresarango.memeit.network.Meme;
 
 import java.util.List;

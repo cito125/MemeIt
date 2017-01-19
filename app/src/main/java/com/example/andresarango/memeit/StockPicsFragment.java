@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.andresarango.memeit.network.Meme;
 import com.example.andresarango.memeit.network.MemeResponse;
 import com.example.andresarango.memeit.network.MemeService;
+import com.example.andresarango.memeit.stockPicsRecyclerView.StockMemeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
