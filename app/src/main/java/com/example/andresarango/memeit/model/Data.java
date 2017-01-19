@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.network;
+package com.example.andresarango.memeit.model;
 
 import java.util.List;
 

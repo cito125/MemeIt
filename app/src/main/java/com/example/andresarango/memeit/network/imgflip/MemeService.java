@@ -1,4 +1,6 @@
-package com.example.andresarango.memeit.network;
+package com.example.andresarango.memeit.network.imgflip;
+
+import com.example.andresarango.memeit.model.MemeResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

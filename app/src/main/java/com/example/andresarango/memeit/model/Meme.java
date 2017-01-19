@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.network;
+package com.example.andresarango.memeit.model;
 
 /**
  * Created by helenchan on 1/19/17.

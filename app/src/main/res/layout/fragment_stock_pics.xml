@@ -3,7 +3,7 @@
     android:id="@+id/stockpic_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.andresarango.memeit.StockPicsFragment">
+    tools:context="com.example.andresarango.memeit.viewpager.tabfragments.StockPicsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/stockpic_recyclerview"

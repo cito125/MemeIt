@@ -1,11 +1,11 @@
-package com.example.andresarango.memeit.stockPicsRecyclerView;
+package com.example.andresarango.memeit.viewpager.tabfragments.stock_pic_rv;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.network.Meme;
+import com.example.andresarango.memeit.model.Meme;
 import com.squareup.picasso.Picasso;
 
 /**
