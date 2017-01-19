@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.tabfragments;
+package com.example.andresarango.memeit.viewpager.tabfragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,13 +13,13 @@ import com.example.andresarango.memeit.R;
  * Created by dannylui on 1/18/17.
  */
 
-public class MemeListFragment extends Fragment {
+public class HomeFragment extends Fragment {
     private View rootView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_tab_memelist, container, false);
+        rootView = inflater.inflate(R.layout.fragment_tab_home, container, false);
         return rootView;
     }
 }
