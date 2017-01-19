@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager pager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment(), "Home");
+        adapter.addFragment(new StockPicsFragment(), "Home");
         adapter.addFragment(new MemeListFragment(), "Meme List");
         pager.setAdapter(adapter);
     }
