@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit;
+package com.example.andresarango.memeit.viewpager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
