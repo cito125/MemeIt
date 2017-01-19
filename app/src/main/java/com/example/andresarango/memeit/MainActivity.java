@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tablayout; // Import design in build.gradle
     private ViewPager pager;
+    private int mToolbarTitleTextColor = 0xFFFFFFFF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupToolbar(Toolbar toolbar) {
         toolbar.setTitle("Placeholder Title");
-        toolbar.setTitleTextColor(0xFFFFFFFF);
+        toolbar.setTitleTextColor(mToolbarTitleTextColor);
         setSupportActionBar(toolbar);
     }
 
     private void setupTabLayout(TabLayout tablayout) {
-        tablayout.setTabTextColors(0xFFFFFFFF, 0xFFFFFFFF);
-        tablayout.setSelectedTabIndicatorColor(0xFFFFFFFF);
+        tablayout.setTabTextColors(mToolbarTitleTextColor, mToolbarTitleTextColor);
+        tablayout.setSelectedTabIndicatorColor(mToolbarTitleTextColor);
     }
 
     private void setupViewPager(ViewPager pager) {
