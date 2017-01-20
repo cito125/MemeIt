@@ -10,4 +10,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.andresarango.memeit.EditMemeActivity">
 
+    <RelativeLayout
+        android:id="@+id/meme_to_be_saved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/meme_image"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
+
+        <FrameLayout
+            android:id="@+id/meme_overlay_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/meme_rv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/meme_rv"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/next_button" />
+
 </RelativeLayout>
