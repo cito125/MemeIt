@@ -51,6 +51,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
             case R.id.make_meme_popular_image_button:
+                Intent tempIntent = new Intent(getContext(), EditMemeActivity.class);
+                startActivity(tempIntent);
                 break;
 
         }

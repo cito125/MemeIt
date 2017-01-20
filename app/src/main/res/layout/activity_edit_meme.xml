@@ -17,6 +17,7 @@
 
         <ImageView
             android:id="@+id/meme_image"
+            android:background="@drawable/bambino"
             android:layout_width="match_parent"
             android:layout_height="400dp" />
 
