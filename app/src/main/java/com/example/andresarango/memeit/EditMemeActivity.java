@@ -1,6 +1,7 @@
 package com.example.andresarango.memeit;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,19 +20,26 @@ public class EditMemeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
+        initialize();
+    }
 
+    private void initialize() {
         memeImage = (ImageView) findViewById(R.id.meme_image);
         nextButton = (Button) findViewById(R.id.next_button);
         memeRv = (RecyclerView) findViewById(R.id.meme_rv);
         memeRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        nextButton.setOnClickListener(onClick());
+    }
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
+    @NonNull
+    private View.OnClickListener onClick() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
                 startActivity(intent);
             }
-        });
+        };
     }
 
 }
