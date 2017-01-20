@@ -33,4 +33,13 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true" />
 
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/meme_rv"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/next_button" />
+
 </RelativeLayout>
