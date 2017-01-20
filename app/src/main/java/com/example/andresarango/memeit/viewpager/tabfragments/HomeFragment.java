@@ -1,10 +1,12 @@
 package com.example.andresarango.memeit.viewpager.tabfragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private View rootView;
+    private FragmentActivity myContext;
     LinearLayout makeMemeFromGalleryButton;
     LinearLayout createMemeFromPopularButton;
     private int PICK_IMAGE_REQUEST = 1;
@@ -51,6 +54,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
             case R.id.make_meme_popular_image_button:
+                myContext.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_home, new StockPicsFragment())
+                        .addToBackStack(null)
+                        .commit();
                 break;
 
         }
@@ -69,5 +76,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        myContext = (FragmentActivity) context;
+        super.onAttach(context);
+    }
 
 }
