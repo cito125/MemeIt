@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import com.example.andresarango.memeit.viewpager.ViewPagerAdapter;
 import com.example.andresarango.memeit.viewpager.tabfragments.HomeFragment;
 import com.example.andresarango.memeit.viewpager.tabfragments.MemeListFragment;
+import com.example.andresarango.memeit.viewpager.tabfragments.StockPicsFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tablayout; // Import design in build.gradle
     private ViewPager pager;
+    private ViewPagerAdapter adapter;
     private int mToolbarTitleTextColor = 0xFFFFFFFF;
 
     @Override
@@ -47,9 +49,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager pager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Create");
         adapter.addFragment(new MemeListFragment(), "History");
         pager.setAdapter(adapter);
+    }
+
+    // Overriding to change the fragment inside the viewpager adapter
+    @Override
+    public void onBackPressed() {
+        if(pager.getCurrentItem() == 0) {
+            if (adapter.getItem(0) instanceof StockPicsFragment) {
+                ViewPagerAdapter.vpInstance.setHomeFragment();
+            } else {
+                super.onBackPressed();
+            }
+        } else {
+            super.onBackPressed();
+        }
     }
 }

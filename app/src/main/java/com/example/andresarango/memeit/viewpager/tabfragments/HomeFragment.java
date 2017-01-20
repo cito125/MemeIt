@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.example.andresarango.memeit.EditMemeActivity;
 import com.example.andresarango.memeit.R;
+import com.example.andresarango.memeit.viewpager.ViewPagerAdapter;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -54,12 +55,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
             case R.id.make_meme_popular_image_button:
-                myContext.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_home, new StockPicsFragment())
-                        .addToBackStack(null)
-                        .commit();
+                ViewPagerAdapter.vpInstance.setStockFragment();
                 break;
-
         }
 
     }
