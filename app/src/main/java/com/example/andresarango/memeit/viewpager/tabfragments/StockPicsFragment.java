@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.model.MemeResponse;
+import com.example.andresarango.memeit.model.imgflip_json.MemeResponse;
 import com.example.andresarango.memeit.network.imgflip.MemeAPI;
 import com.example.andresarango.memeit.viewpager.tabfragments.stock_pic_rv.StockMemeAdapter;
 

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.model.Meme;
+import com.example.andresarango.memeit.model.imgflip_json.Meme;
 
 import java.util.ArrayList;
 import java.util.List;
