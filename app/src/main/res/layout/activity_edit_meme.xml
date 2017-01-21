@@ -48,13 +48,13 @@
         android:layout_toRightOf="@id/btn_choose_meme"
         android:text="edit"/>
 
-    <!--<Button-->
-        <!--android:id="@+id/btn_next_activity"-->
-        <!--android:layout_width="50dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_above="@id/meme_rv"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:background="@drawable/btn_next_activity" />-->
+    <Button
+        android:id="@+id/btn_next_activity"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/meme_rv"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/next_button" />
 
 </RelativeLayout>
