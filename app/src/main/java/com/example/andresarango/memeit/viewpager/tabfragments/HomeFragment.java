@@ -1,8 +1,10 @@
 package com.example.andresarango.memeit.viewpager.tabfragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,10 +22,12 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
+    private static final int PHOTO_ID = 22;
+    private int PICK_IMAGE_REQUEST = 1;
     private View rootView;
     LinearLayout makeMemeFromGalleryButton;
     LinearLayout createMemeFromPopularButton;
-    private int PICK_IMAGE_REQUEST = 1;
+    LinearLayout createMemeFromCamera;
 
     @Nullable
     @Override
@@ -38,7 +42,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         makeMemeFromGalleryButton.setOnClickListener(this);
         createMemeFromPopularButton = (LinearLayout) rootView.findViewById(R.id.make_meme_popular_image_button);
         createMemeFromPopularButton.setOnClickListener(this);
-
+        createMemeFromCamera = (LinearLayout) rootView.findViewById(R.id.make_meme_camera);
+        createMemeFromCamera.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +56,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
             case R.id.make_meme_popular_image_button:
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.activity_main, new StockPicsFragment())
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case R.id.make_meme_camera:
+                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intentCamera, PHOTO_ID);
                 break;
 
         }
@@ -67,7 +80,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             intent.putExtra("ImageString", uri.toString());
             startActivity(intent);
         }
+        if (requestCode == PHOTO_ID && resultCode == RESULT_OK) {
+            this.sendPicture(data);
+
+        }
     }
 
+    private void sendPicture(Intent intent) {
+        Bundle intentExtras = intent.getExtras();
+        Bitmap picture = (Bitmap) intentExtras.get("data");
+        Uri pictureUri = intent.getData();
+        Intent intentCam = new Intent(rootView.getContext(), EditMemeActivity.class);
+        intent.putExtra("CameraPhotoUri", pictureUri.toString());
+        intent.putExtra("BitmapCamera", picture);
+        startActivity(intentCam);
 
+    }
 }

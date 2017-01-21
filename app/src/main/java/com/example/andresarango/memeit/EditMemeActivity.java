@@ -1,26 +1,31 @@
 package com.example.andresarango.memeit;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class EditMemeActivity extends AppCompatActivity {
+import com.squareup.picasso.Picasso;
 
+
+public class EditMemeActivity extends AppCompatActivity {
     private RecyclerView memeRv;
     private ImageView memeImage;
     private Button nextButton;
+    private String memeURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
         initialize();
+        showPicture();
     }
 
     private void initialize() {
@@ -42,4 +47,18 @@ public class EditMemeActivity extends AppCompatActivity {
         };
     }
 
+    private void showPicture() {
+        Bitmap picture = getIntent().getParcelableExtra("BitmapCamera");
+        if (picture != null) {
+            memeImage.setImageBitmap(picture);
+        }
+    }
+
+    private void loadStockImage(){
+        Intent intent = getIntent();
+        memeURL = intent.getStringExtra("urlMe");
+        Picasso.with(this)
+                .load(memeURL)
+                .into(memeImage);
+    }
 }
