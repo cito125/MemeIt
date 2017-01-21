@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">MemeIt</string>
-
+    <string name="typehere">Type Here</string>
 </resources>
