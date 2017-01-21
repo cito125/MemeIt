@@ -17,9 +17,10 @@
 
         <ImageView
             android:id="@+id/meme_image"
-            android:background="@drawable/bambino"
             android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="400dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"/>
 
         <FrameLayout
             android:id="@+id/meme_overlay_fragment"

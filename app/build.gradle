@@ -7,6 +7,9 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
+    dexOptions {
+        jumboMode true
+    }
     defaultConfig {
         applicationId "com.example.andresarango.memeit"
         minSdkVersion 16
@@ -14,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [appPackageName: "${applicationId}"]
     }
     buildTypes {
         release {
@@ -36,6 +40,10 @@ android {
         exclude 'META-INF/DEPENDENCIES'
         pickFirst 'AndroidManifest.xml'
     }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+    }
 }
 
 dependencies {
@@ -53,6 +61,12 @@ dependencies {
 
     /* 4) Add the CSDK framework dependencies (Make sure these version numbers are correct) */
     compile 'com.adobe.creativesdk.foundation:auth:0.9.1186'
+    compile 'com.localytics.android:library:3.8.0'
+    compile ('com.adobe.creativesdk:image:4.8.3'){
+        exclude group: 'com.google.android'
+    }
+
+
 
     testCompile 'junit:junit:4.12'
 }
