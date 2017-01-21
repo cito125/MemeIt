@@ -20,7 +20,7 @@ import java.util.List;
  * Created by leighdouglas on 1/20/17.
  */
 
-public class DrawingView extends View implements EditMemeActivity.Listener {
+public class DrawingView extends View  {
 
     private Path path;
     private Paint paint;
@@ -101,11 +101,11 @@ public class DrawingView extends View implements EditMemeActivity.Listener {
         return true;
     }
 
-    @Override
-    public void undo() {
-        if(moves.size() > 0){
-            moves.remove(moves.size()-1);
-            invalidate();
-        }
-    }
+//    @Override
+//    public void undo() {
+//        if(moves.size() > 0){
+//            moves.remove(moves.size()-1);
+//            invalidate();
+//        }
+//    }
 }
