@@ -59,6 +59,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:support-v4:24.1.0'
 
+    compile 'com.github.QuadFlask:colorpicker:0.0.12'
+
     /* 4) Add the CSDK framework dependencies (Make sure these version numbers are correct) */
     compile 'com.adobe.creativesdk.foundation:auth:0.9.1186'
     compile 'com.localytics.android:library:3.8.0'

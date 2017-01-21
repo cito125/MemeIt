@@ -30,6 +30,9 @@ allprojects {
             url 'http://maven.localytics.com/public'
         }
 
+        maven { url "https://jitpack.io" }
+
+
     }
 }
 

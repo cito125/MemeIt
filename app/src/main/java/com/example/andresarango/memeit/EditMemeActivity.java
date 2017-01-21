@@ -1,5 +1,6 @@
 package com.example.andresarango.memeit;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -13,10 +14,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
+import com.example.andresarango.memeit.editmeme.FragmentAdapter;
+import com.example.andresarango.memeit.editmeme.memes.vanilla_meme.VanillaMemeWrapper;
+import com.example.andresarango.memeit.editmeme.memes.vanilla_meme.VanilleMemeFragment;
+import com.example.andresarango.memeit.editmeme.utility.EditorViewHolder;
 
-public class EditMemeActivity extends AppCompatActivity {
+public class EditMemeActivity extends AppCompatActivity implements EditorViewHolder.Listener{
 
     private RecyclerView memeRv;
+    private RecyclerView.Adapter fragmentAdapter;
     private ImageView memeImage;
     private Button nextButton;
 
@@ -24,7 +30,11 @@ public class EditMemeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
-        initialize();
+        initialize(savedInstanceState);
+        startImageEditing();
+    }
+
+    private void startImageEditing() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -56,12 +66,24 @@ public class EditMemeActivity extends AppCompatActivity {
         }
     }
 
-    private void initialize() {
+    private void initialize(Bundle savedInstanceState) {
         memeImage = (ImageView) findViewById(R.id.meme_image);
         nextButton = (Button) findViewById(R.id.next_button);
         memeRv = (RecyclerView) findViewById(R.id.meme_rv);
+        startFragment(savedInstanceState, new VanilleMemeFragment());
         memeRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        fragmentAdapter = new FragmentAdapter(this);
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new VanillaMemeWrapper());
         nextButton.setOnClickListener(onClick());
+    }
+
+    private void startFragment(Bundle savedInstanceState, Fragment memeFragment) {
+        if(savedInstanceState == null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.meme_overlay_fragment, memeFragment)
+                    .commit();
+        }
     }
 
     @NonNull
@@ -75,4 +97,13 @@ public class EditMemeActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    public void setAdapter(RecyclerView.Adapter editMemeAdapter) {
+        memeRv.setAdapter(editMemeAdapter);
+    }
+
+    @Override
+    public void swapFragment(Fragment memeFragment) {
+        startFragment(null,memeFragment);
+    }
 }
