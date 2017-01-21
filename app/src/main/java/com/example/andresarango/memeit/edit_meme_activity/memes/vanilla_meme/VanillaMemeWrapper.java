@@ -14,7 +14,7 @@ import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
  */
 
 public class VanillaMemeWrapper implements MemeWrapper {
-    public Fragment getmFragment() {
+    public Fragment getFragment() {
         return mFragment;
     }
 

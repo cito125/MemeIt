@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.edit_meme_activity;
+package com.example.andresarango.memeit.edit_meme_activity.memes;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;

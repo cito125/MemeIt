@@ -14,14 +14,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
-import com.example.andresarango.memeit.edit_meme_activity.FragmentAdapter;
+import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
-import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanilleMemeFragment;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
 
-public class EditMemeActivity extends AppCompatActivity implements EditorViewHolder.Listener{
+public class EditMemeActivity extends AppCompatActivity implements EditorViewHolder.Listener {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter fragmentAdapter;
@@ -77,36 +76,41 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 //        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
         mChooseMemeButton = (Button) findViewById(R.id.btn_choose_meme);
         mEditMemeButton = (Button) findViewById(R.id.btn_edit_meme);
-        mRecyclerView = (RecyclerView) findViewById(R.id.meme_rv);
-
         mChooseMemeButton.setOnClickListener(onClickButton());
         mEditMemeButton.setOnClickListener(onClickButton());
-        startFragment(savedInstanceState, new VanilleMemeFragment());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        fragmentAdapter = new FragmentAdapter(this);
 
         VanillaMemeWrapper vanillaMemeWrapper = new VanillaMemeWrapper();
-        mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getmFragment());
-        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
+
+        startFragment(savedInstanceState, vanillaMemeWrapper.getFragment());
+        setUpRecyclerView(vanillaMemeWrapper);
+
+
 //        mNextActivityButton.setOnClickListener(onClick());
+    }
+
+    private void setUpRecyclerView(VanillaMemeWrapper vanillaMemeWrapper) {
+        mRecyclerView = (RecyclerView) findViewById(R.id.meme_rv);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        fragmentAdapter = new FragmentAdapter(this);
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
+        mRecyclerView.setAdapter(fragmentAdapter);
+        mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }
 
     private View.OnClickListener onClickButton() {
         return view -> {
-            switch(view.getId()){
+            switch (view.getId()) {
                 case R.id.btn_choose_meme:
                     mRecyclerView.setAdapter(fragmentAdapter);
                     break;
                 case R.id.btn_edit_meme:
                     mRecyclerView.setAdapter(mEditAdapter);
-
-
             }
         };
     }
 
     private void startFragment(Bundle savedInstanceState, Fragment memeFragment) {
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.meme_overlay_fragment, memeFragment)
@@ -116,12 +120,9 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     @NonNull
     private View.OnClickListener onClick() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
-                startActivity(intent);
-            }
+        return view -> {
+            Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
+            startActivity(intent);
         };
     }
 
@@ -132,6 +133,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     @Override
     public void swapFragment(Fragment memeFragment) {
-        startFragment(null,memeFragment);
+        startFragment(null, memeFragment);
     }
 }
