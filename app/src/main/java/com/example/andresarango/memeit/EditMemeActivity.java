@@ -2,13 +2,10 @@ package com.example.andresarango.memeit;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -51,7 +48,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         startFragment(savedInstanceState, vanillaMemeWrapper.getFragment());
         setUpRecyclerView(vanillaMemeWrapper);
 
-
         mNextActivityButton.setOnClickListener(onClick());
     }
 
@@ -85,7 +81,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         }
     }
 
-    @NonNull
     private View.OnClickListener onClick() {
         return view -> {
             Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);

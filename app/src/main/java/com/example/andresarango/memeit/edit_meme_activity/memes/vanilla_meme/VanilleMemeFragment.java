@@ -33,10 +33,10 @@ public class VanilleMemeFragment extends Fragment implements VanillaMemeListener
     }
 
     @Override
-    public void addTextView() {
+    public void addMobileEditText() {
         ViewGroup rootView = (ViewGroup) getView();
         MobileTextView mobileTextView = new MobileTextView(getActivity(),rootView);
-        mobileTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        mobileTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         mMobileTextViewList.add(mobileTextView);
         rootView.addView(mobileTextView);
     }
