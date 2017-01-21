@@ -1,9 +1,10 @@
 package com.example.andresarango.memeit;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,6 +22,7 @@ public class EditMemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
         initialize();
+        showPicture();
     }
 
     private void initialize() {
@@ -42,4 +44,10 @@ public class EditMemeActivity extends AppCompatActivity {
         };
     }
 
+    private void showPicture() {
+        Bitmap picture = getIntent().getParcelableExtra("BitmapCamera");
+        if (picture != null) {
+            memeImage.setImageBitmap(picture);
+        }
+    }
 }
