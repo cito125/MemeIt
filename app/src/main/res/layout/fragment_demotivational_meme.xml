@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="323dp"
+            android:background="@drawable/demotivational_template"
+            android:id="@+id/imageView" />
+
+        <ImageView
+            android:id="@+id/demotivational_iv"
+            android:layout_width="280dp"
+            android:layout_height="189dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="33dp" />
+
+        <EditText
+            android:id="@+id/demot_largetext"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@id/demotivational_iv"
+            android:layout_centerHorizontal="true"
+            android:hint="Type Caption"
+            android:inputType="textCapCharacters|textAutoCorrect"
+            android:paddingTop="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:fontFamily="serif"
+            android:background="@null"/>
+
+        <EditText
+            android:id="@+id/demot_smalltext"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:hint="@string/typehere"
+            android:inputType="textImeMultiLine|textAutoComplete|textCapSentences"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:background="@null"/>
+
+
+    </RelativeLayout>
+</FrameLayout>
