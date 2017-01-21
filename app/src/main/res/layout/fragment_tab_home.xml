@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/fragment_home"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-    android:id="@+id/make_meme_from_gallery_button"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:clickable="true">
-    <ImageView
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/ic_camera_roll_white_24dp"
-        android:tint="@color/colorPrimaryDark"/>
-    <TextView
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:text="Create New Meme From Your Gallery"
-        android:layout_weight="1"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
-</LinearLayout>
+        android:id="@+id/make_meme_from_gallery_button"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:clickable="true">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_camera_roll_white_24dp"
+            android:tint="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Create New Meme From Your Gallery"
+            android:textSize="20dp" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/make_meme_popular_image_button"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:clickable="true">
+
         <ImageView
-            android:layout_weight="1"
-            android:layout_gravity="center"
             android:layout_width="30dp"
             android:layout_height="40dp"
-            android:src="@mipmap/ic_create_white_24dp"
-            android:tint="@color/colorPrimaryDark"/>
-        <TextView
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:text="Create New Meme From Popular Images"
+            android:layout_gravity="center"
             android:layout_weight="1"
+            android:src="@mipmap/ic_create_white_24dp"
+            android:tint="@color/colorPrimaryDark" />
+
+        <TextView
             android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Create New Meme From Popular Images"
+            android:textSize="20dp" />
     </LinearLayout>
 
 
