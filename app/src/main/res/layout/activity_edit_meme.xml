@@ -23,24 +23,84 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/meme_rv"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true" />
-
-    <Button
-        android:id="@+id/open"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
     <Button
         android:id="@+id/next_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_above="@id/meme_rv"
+        android:text="next"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/next_button" />
+
+
+    <LinearLayout
+        android:id="@+id/filter_image_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="memes" />
+
+        <Button
+            android:id="@+id/open"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="edit" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/meme_rv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/filter_image_buttons"/>
+
+    <LinearLayout
+        android:layout_above="@id/meme_rv"
+        android:id="@+id/draw_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/colormenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="change color" />
+
+        <Button
+            android:id="@+id/undo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="undo" />
+
+        <Button
+            android:id="@+id/clearbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:text="clear" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/draw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/draw_options"
+        android:background="@android:color/white"
+        android:text="draw" />
 
 </RelativeLayout>

@@ -20,11 +20,15 @@ import com.squareup.picasso.Picasso;
 
 public class EditMemeActivity extends AppCompatActivity {
 
+    private Listener listener;
     private RecyclerView memeRv;
     private ImageView memeImage;
     private Button nextButton;
     private Button openDrawingMeme;
+    private Button undoButton;
     private RelativeLayout memeToBeSaved;
+    private String uriString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +36,13 @@ public class EditMemeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_meme);
 
         Intent intent = getIntent();
-        String uriString = intent.getStringExtra("ImageString");
+        uriString = intent.getStringExtra("ImageString");
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        undoButton = (Button) findViewById(R.id.undo);
 
         memeImage = (ImageView) findViewById(R.id.meme_image);
         memeToBeSaved = (RelativeLayout) findViewById(R.id.meme_to_be_saved);
+
 
         Glide
                 .with(getApplicationContext())
@@ -47,13 +53,14 @@ public class EditMemeActivity extends AppCompatActivity {
 
 
         nextButton = (Button) findViewById(R.id.next_button);
-        openDrawingMeme = (Button) findViewById(R.id.open);
+        openDrawingMeme = (Button) findViewById(R.id.draw);
         openDrawingMeme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.meme_overlay_fragment, new DrawingMemeFragment())
                         .commit();
+                listener = (Listener) findViewById(R.id.drawing_view);
             }
         });
 
@@ -72,6 +79,21 @@ public class EditMemeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.undo();
+            }
+        });
+    }
+
+    public interface Listener {
+        void undo();
+    }
+
+    public String getUriString(){
+        return this.uriString;
     }
 
 }
