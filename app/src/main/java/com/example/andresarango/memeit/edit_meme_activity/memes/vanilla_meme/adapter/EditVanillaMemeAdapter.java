@@ -19,6 +19,9 @@ public class EditVanillaMemeAdapter extends RecyclerView.Adapter {
 
     public EditVanillaMemeAdapter(VanillaMemeListener listener) {
         mListener = listener;
+        for (int i = 0; i < 3; i++) {
+            editMemelist.add(i);
+        }
     }
 
     @Override
