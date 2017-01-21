@@ -6,15 +6,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.andresarango.memeit.viewpager.ViewPagerAdapter;
 import com.example.andresarango.memeit.viewpager.tabfragments.HomeFragment;
 import com.example.andresarango.memeit.viewpager.tabfragments.MemeListFragment;
 import com.example.andresarango.memeit.viewpager.tabfragments.StockPicsFragment;
-import com.example.andresarango.memeit.viewpager.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tablayout; // Import design in build.gradle
     private ViewPager pager;
+    private ViewPagerAdapter adapter;
     private int mToolbarTitleTextColor = 0xFFFFFFFF;
 
     @Override
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupToolbar(Toolbar toolbar) {
-        toolbar.setTitle("Placeholder Title");
+        toolbar.setTitle("Create a meme");
         toolbar.setTitleTextColor(mToolbarTitleTextColor);
         setSupportActionBar(toolbar);
     }
@@ -48,10 +49,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager pager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment(), "Home");
-        adapter.addFragment(new MemeListFragment(), "Meme List");
-        adapter.addFragment(new StockPicsFragment(), "Create");
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new HomeFragment(), "Create");
+        adapter.addFragment(new MemeListFragment(), "History");
         pager.setAdapter(adapter);
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == 0) {
+                    toolbar.setTitle("Create a meme");
+                } else if (position == 1) {
+                    toolbar.setTitle("Your created memes");
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
+    // Overriding to change the fragment inside the viewpager adapter
+    @Override
+    public void onBackPressed() {
+        if(pager.getCurrentItem() == 0) {
+            if (adapter.getItem(0) instanceof StockPicsFragment) {
+                ViewPagerAdapter.vpInstance.setHomeFragment();
+            } else {
+                super.onBackPressed();
+            }
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
 }

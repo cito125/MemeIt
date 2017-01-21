@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.andresarango.memeit.EditMemeActivity;
 import com.example.andresarango.memeit.R;
+import com.example.andresarango.memeit.viewpager.ViewPagerAdapter;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -21,6 +22,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private View rootView;
+    LinearLayout createMemeFromCamera;
     LinearLayout makeMemeFromGalleryButton;
     LinearLayout createMemeFromPopularButton;
     private int PICK_IMAGE_REQUEST = 1;
@@ -34,16 +36,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeButtons(View rootView){
+        createMemeFromCamera = (LinearLayout) rootView.findViewById(R.id.make_meme_from_camera);
+        createMemeFromCamera.setOnClickListener(this);
         makeMemeFromGalleryButton = (LinearLayout) rootView.findViewById(R.id.make_meme_from_gallery_button);
         makeMemeFromGalleryButton.setOnClickListener(this);
         createMemeFromPopularButton = (LinearLayout) rootView.findViewById(R.id.make_meme_popular_image_button);
         createMemeFromPopularButton.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
+            case R.id.make_meme_from_camera:
+                break;
             case R.id.make_meme_from_gallery_button:
                 Intent intent = new Intent();
                 intent.setType("image/*");
@@ -51,8 +56,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
             case R.id.make_meme_popular_image_button:
+                ViewPagerAdapter.vpInstance.setStockFragment();
                 break;
-
         }
 
     }
@@ -68,6 +73,4 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
     }
-
-
 }

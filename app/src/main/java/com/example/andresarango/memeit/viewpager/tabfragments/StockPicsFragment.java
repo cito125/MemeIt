@@ -23,7 +23,6 @@ public class StockPicsFragment extends Fragment {
     private RecyclerView recyclerView;
     private StockMemeAdapter mMemeAdapter;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,8 +45,6 @@ public class StockPicsFragment extends Fragment {
         recyclerView.setAdapter(mMemeAdapter);
     }
 
-
-
     public void setMemeAdapter() {
         MemeAPI.getInstance().getMemeResponse().enqueue(new Callback<MemeResponse>() {
             @Override
@@ -60,7 +57,5 @@ public class StockPicsFragment extends Fragment {
 
             }
         });
-
-
     }
 }
