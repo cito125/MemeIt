@@ -11,11 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class EditMemeActivity extends AppCompatActivity {
+import com.squareup.picasso.Picasso;
 
+
+public class EditMemeActivity extends AppCompatActivity {
     private RecyclerView memeRv;
     private ImageView memeImage;
     private Button nextButton;
+    private String memeURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +52,13 @@ public class EditMemeActivity extends AppCompatActivity {
         if (picture != null) {
             memeImage.setImageBitmap(picture);
         }
+    }
+
+    private void loadStockImage(){
+        Intent intent = getIntent();
+        memeURL = intent.getStringExtra("urlMe");
+        Picasso.with(this)
+                .load(memeURL)
+                .into(memeImage);
     }
 }

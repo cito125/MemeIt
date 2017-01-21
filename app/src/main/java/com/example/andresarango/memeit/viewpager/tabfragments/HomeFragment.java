@@ -24,12 +24,10 @@ import static android.app.Activity.RESULT_OK;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final int PHOTO_ID = 22;
     private int PICK_IMAGE_REQUEST = 1;
-//    private Bitmap picture;
     private View rootView;
     LinearLayout makeMemeFromGalleryButton;
     LinearLayout createMemeFromPopularButton;
     LinearLayout createMemeFromCamera;
-//    Uri pictureUri;
 
     @Nullable
     @Override
@@ -58,11 +56,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
                 break;
             case R.id.make_meme_popular_image_button:
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.activity_main, new StockPicsFragment())
+                        .addToBackStack(null)
+                        .commit();
                 break;
-
             case R.id.make_meme_camera:
                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intentCamera, PHOTO_ID);
+                break;
 
         }
 

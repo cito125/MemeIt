@@ -6,10 +6,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.andresarango.memeit.viewpager.ViewPagerAdapter;
 import com.example.andresarango.memeit.viewpager.tabfragments.HomeFragment;
 import com.example.andresarango.memeit.viewpager.tabfragments.MemeListFragment;
-import com.example.andresarango.memeit.viewpager.tabfragments.StockPicsFragment;
-import com.example.andresarango.memeit.viewpager.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "Home");
         adapter.addFragment(new MemeListFragment(), "Meme List");
-        adapter.addFragment(new StockPicsFragment(), "Create");
         pager.setAdapter(adapter);
     }
 }
