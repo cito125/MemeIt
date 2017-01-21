@@ -40,7 +40,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     private void initialize(Bundle savedInstanceState) {
         memeImage = (ImageView) findViewById(R.id.meme_image);
-//        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
+        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
         mChooseMemeButton = (Button) findViewById(R.id.btn_choose_meme);
         mEditMemeButton = (Button) findViewById(R.id.btn_edit_meme);
         mChooseMemeButton.setOnClickListener(onClickButton());
@@ -52,7 +52,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         setUpRecyclerView(vanillaMemeWrapper);
 
 
-//        mNextActivityButton.setOnClickListener(onClick());
+        mNextActivityButton.setOnClickListener(onClick());
     }
 
     private void setUpRecyclerView(VanillaMemeWrapper vanillaMemeWrapper) {
