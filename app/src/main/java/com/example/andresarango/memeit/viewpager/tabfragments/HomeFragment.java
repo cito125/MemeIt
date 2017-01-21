@@ -1,12 +1,10 @@
 package com.example.andresarango.memeit.viewpager.tabfragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +22,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private View rootView;
-    private FragmentActivity myContext;
+    LinearLayout createMemeFromCamera;
     LinearLayout makeMemeFromGalleryButton;
     LinearLayout createMemeFromPopularButton;
     private int PICK_IMAGE_REQUEST = 1;
@@ -38,16 +36,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeButtons(View rootView){
+        createMemeFromCamera = (LinearLayout) rootView.findViewById(R.id.make_meme_from_camera);
+        createMemeFromCamera.setOnClickListener(this);
         makeMemeFromGalleryButton = (LinearLayout) rootView.findViewById(R.id.make_meme_from_gallery_button);
         makeMemeFromGalleryButton.setOnClickListener(this);
         createMemeFromPopularButton = (LinearLayout) rootView.findViewById(R.id.make_meme_popular_image_button);
         createMemeFromPopularButton.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
+            case R.id.make_meme_from_camera:
+                break;
             case R.id.make_meme_from_gallery_button:
                 Intent intent = new Intent();
                 intent.setType("image/*");
@@ -72,12 +73,4 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
         }
     }
-
-
-    @Override
-    public void onAttach(Context context) {
-        myContext = (FragmentActivity) context;
-        super.onAttach(context);
-    }
-
 }

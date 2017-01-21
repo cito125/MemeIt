@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupToolbar(Toolbar toolbar) {
-        toolbar.setTitle("Placeholder Title");
+        toolbar.setTitle("Create a meme");
         toolbar.setTitleTextColor(mToolbarTitleTextColor);
         setSupportActionBar(toolbar);
     }
@@ -53,6 +53,27 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new HomeFragment(), "Create");
         adapter.addFragment(new MemeListFragment(), "History");
         pager.setAdapter(adapter);
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == 0) {
+                    toolbar.setTitle("Create a meme");
+                } else if (position == 1) {
+                    toolbar.setTitle("Your created memes");
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     // Overriding to change the fragment inside the viewpager adapter
@@ -68,4 +89,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
 }
