@@ -1,11 +1,11 @@
-package com.example.andresarango.memeit.editmeme.memes.vanilla_meme.adapter;
+package com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.editmeme.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 
 import java.util.ArrayList;
 import java.util.List;

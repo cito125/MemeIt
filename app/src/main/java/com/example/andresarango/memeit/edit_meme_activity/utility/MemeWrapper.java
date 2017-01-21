@@ -1,9 +1,6 @@
-package com.example.andresarango.memeit.editmeme.utility;
+package com.example.andresarango.memeit.edit_meme_activity.utility;
 
-import android.app.Fragment;
 import android.view.ViewGroup;
-
-import com.example.andresarango.memeit.editmeme.utility.EditorViewHolder;
 
 /**
  * Created by andresarango on 1/20/17.

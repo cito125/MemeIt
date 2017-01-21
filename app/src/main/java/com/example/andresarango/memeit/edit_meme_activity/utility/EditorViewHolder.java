@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.editmeme.utility;
+package com.example.andresarango.memeit.edit_meme_activity.utility;
 
 import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -32,12 +32,12 @@ public abstract class EditorViewHolder extends RecyclerView.ViewHolder implement
 
     @Override
     public void onClick(View view) {
-        mListener.setAdapter(getAdapter());
+        mListener.setEditMemeAdapter(getAdapter());
         mListener.swapFragment(getMemeFragment());
     }
 
     public interface Listener {
-        void setAdapter(RecyclerView.Adapter editMemeAdapter);
+        void setEditMemeAdapter(RecyclerView.Adapter editMemeAdapter);
         void swapFragment(Fragment memeFragment);
     }
 }

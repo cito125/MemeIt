@@ -1,10 +1,10 @@
-package com.example.andresarango.memeit.editmeme;
+package com.example.andresarango.memeit.edit_meme_activity;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.example.andresarango.memeit.editmeme.utility.EditorViewHolder;
-import com.example.andresarango.memeit.editmeme.utility.MemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,6 @@ public class FragmentAdapter extends RecyclerView.Adapter<EditorViewHolder> {
     public void onBindViewHolder(EditorViewHolder holder, int position) {
 
     }
-
 
     @Override
     public int getItemViewType(int position) {

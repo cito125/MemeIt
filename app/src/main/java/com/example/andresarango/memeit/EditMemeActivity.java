@@ -14,24 +14,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
-import com.example.andresarango.memeit.editmeme.FragmentAdapter;
-import com.example.andresarango.memeit.editmeme.memes.vanilla_meme.VanillaMemeWrapper;
-import com.example.andresarango.memeit.editmeme.memes.vanilla_meme.VanilleMemeFragment;
-import com.example.andresarango.memeit.editmeme.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.FragmentAdapter;
+import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanilleMemeFragment;
+import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
+import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
 
 public class EditMemeActivity extends AppCompatActivity implements EditorViewHolder.Listener{
 
-    private RecyclerView memeRv;
+    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter fragmentAdapter;
     private ImageView memeImage;
-    private Button nextButton;
+    private Button mNextActivityButton;
+    private Button mChooseMemeButton;
+    private Button mEditMemeButton;
+    private RecyclerView.Adapter mEditAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
         initialize(savedInstanceState);
-        startImageEditing();
+//        startImageEditing();
     }
 
     private void startImageEditing() {
@@ -68,13 +74,35 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     private void initialize(Bundle savedInstanceState) {
         memeImage = (ImageView) findViewById(R.id.meme_image);
-        nextButton = (Button) findViewById(R.id.next_button);
-        memeRv = (RecyclerView) findViewById(R.id.meme_rv);
+//        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
+        mChooseMemeButton = (Button) findViewById(R.id.btn_choose_meme);
+        mEditMemeButton = (Button) findViewById(R.id.btn_edit_meme);
+        mRecyclerView = (RecyclerView) findViewById(R.id.meme_rv);
+
+        mChooseMemeButton.setOnClickListener(onClickButton());
+        mEditMemeButton.setOnClickListener(onClickButton());
         startFragment(savedInstanceState, new VanilleMemeFragment());
-        memeRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         fragmentAdapter = new FragmentAdapter(this);
-        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new VanillaMemeWrapper());
-        nextButton.setOnClickListener(onClick());
+
+        VanillaMemeWrapper vanillaMemeWrapper = new VanillaMemeWrapper();
+        mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getmFragment());
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
+//        mNextActivityButton.setOnClickListener(onClick());
+    }
+
+    private View.OnClickListener onClickButton() {
+        return view -> {
+            switch(view.getId()){
+                case R.id.btn_choose_meme:
+                    mRecyclerView.setAdapter(fragmentAdapter);
+                    break;
+                case R.id.btn_edit_meme:
+                    mRecyclerView.setAdapter(mEditAdapter);
+
+
+            }
+        };
     }
 
     private void startFragment(Bundle savedInstanceState, Fragment memeFragment) {
@@ -98,8 +126,8 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     }
 
     @Override
-    public void setAdapter(RecyclerView.Adapter editMemeAdapter) {
-        memeRv.setAdapter(editMemeAdapter);
+    public void setEditMemeAdapter(RecyclerView.Adapter editMemeAdapter) {
+        mEditAdapter = editMemeAdapter;
     }
 
     @Override

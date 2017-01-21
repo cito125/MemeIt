@@ -1,7 +1,6 @@
-package com.example.andresarango.memeit.editmeme.memes.vanilla_meme;
+package com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme;
 
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,11 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.editmeme.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 import com.example.andresarango.memeit.view.MobileTextView;
 import com.flask.colorpicker.ColorPickerView;
-import com.flask.colorpicker.OnColorSelectedListener;
-import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package com.example.andresarango.memeit.editmeme.memes.vanilla_meme.adapter;
+package com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.andresarango.memeit.editmeme.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 
 /**
  * Created by andresarango on 1/21/17.
