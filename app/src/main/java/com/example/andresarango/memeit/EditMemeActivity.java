@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,7 +46,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private String memeURL;
     private Toolbar editMemeToolbar;
     private RelativeLayout rl;
-    String uri;
 
     private Bitmap mMemeImageBitmap;
 
@@ -54,8 +54,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
-
-        mMemeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
 
         initialize(savedInstanceState);
 
@@ -123,27 +121,31 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         switch (item.getItemId()) {
             case R.id.next:
 
-                new Thread(new Runnable() {
+                Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         rl.setDrawingCacheEnabled(true);
                         Bitmap b = rl.getDrawingCache();
 
-                        uri = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), b, "image1", "an image");
+                        String uri = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), b, "image1", "an image");
+                        Log.d("This is the uri", uri);
 
                         MemeDatabaseHelper memeDatabaseHelper = MemeDatabaseHelper.getInstance(getApplicationContext());
                         SQLiteDatabase sqLiteDatabase = memeDatabaseHelper.getSQLiteDatabase(memeDatabaseHelper);
                         memeDatabaseHelper.addMeme(new MemeURI(uri), sqLiteDatabase);
 
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("image/*");
+                        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri));  //need to add URI
+                        String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
+                        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                        startActivity(Intent.createChooser(intent, "Share via"));
+
                     }
                 });
 
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("image/jpeg");
-                intent.putExtra(Intent.EXTRA_STREAM, uri);  //need to add URI
-                String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
-                intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(intent, "Share via"));
+                thread.start();
+
 
             default:
                 return super.onOptionsItemSelected(item);
