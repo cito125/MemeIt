@@ -44,7 +44,7 @@ public class DrawingView extends View implements EditDrawViewHolder.Listener {
 
     private void setUpPaint() {
         paint = new Paint();
-        paint.setColor(Color.GREEN);
+        paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(20);
         paint.setAntiAlias(true);
