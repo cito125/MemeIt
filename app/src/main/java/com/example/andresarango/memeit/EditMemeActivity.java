@@ -55,7 +55,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
 
-//        mMemeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
 
         initialize(savedInstanceState);
 
