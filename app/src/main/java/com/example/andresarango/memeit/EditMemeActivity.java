@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme.DragMemeWrapper;
-import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme.ExpectationMemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
@@ -42,12 +42,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         setContentView(R.layout.activity_edit_meme);
 
         mMemeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
-
-//        How to make danny meme fragment below, make instance of my fragment with bitmap and inflate it
-//        DragMemeFragment dragMemeFragment = DragMemeFragment.newInstance(mMemeImageBitmap);
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.activity_create_meme, dragMemeFragment)
-//                .commit();
 
         initialize(savedInstanceState);
     }
