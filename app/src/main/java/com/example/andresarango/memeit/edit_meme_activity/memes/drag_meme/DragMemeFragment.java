@@ -34,7 +34,6 @@ public class DragMemeFragment extends Fragment {
         Bundle args = new Bundle();
         args.putParcelable(IMAGE_KEY, bmp);
         dragMemeFragment.setArguments(args);
-
         return dragMemeFragment;
     }
 
@@ -57,6 +56,8 @@ public class DragMemeFragment extends Fragment {
         setupToolkit();
         addSurfaceViewToFragment();
         setupRecyclerView();
+
+
     }
 
     private void addSurfaceViewToFragment() {
@@ -71,8 +72,8 @@ public class DragMemeFragment extends Fragment {
         mySurfaceView = new MySurfaceView(getActivity(), image, this);
         mySurfaceView.setZOrderOnTop(true);
         mySurfaceView.getHolder().setFormat(PixelFormat.TRANSPARENT);
-        dragMemeAdapter.setMySurfaceView(mySurfaceView);
         surfaceViewContainer.addView(mySurfaceView);
+//        dragMemeAdapter.setMySurfaceView(mySurfaceView);
 
     }
 
