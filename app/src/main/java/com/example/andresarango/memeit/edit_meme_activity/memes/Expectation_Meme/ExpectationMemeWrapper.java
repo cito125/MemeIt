@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme;
+package com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,12 +12,12 @@ import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
  */
 
 public class ExpectationMemeWrapper implements MemeWrapper {
-    ExpectationMemeFragment expectationMemeFragment = new ExpectationMemeFragment();
+    com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeFragment ExpectationMemeFragment = new com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeFragment();
 
     @Override
     public EditorViewHolder getViewHolder(ViewGroup parent, EditorViewHolder.Listener listener) {
-        return new ExpectationMemeViewHolder(LayoutInflater
+        return new com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.viewholder_expectation_meme, parent, false),listener,expectationMemeFragment);
+                .inflate(R.layout.viewholder_expectation_meme, parent, false),listener,ExpectationMemeFragment);
     }
 }
