@@ -4,12 +4,14 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.andresarango.memeit.R;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.view.MobileEditText;
 import com.example.andresarango.memeit.view.MobileTextView;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
@@ -23,7 +25,9 @@ import java.util.List;
  */
 
 public class VanilleMemeFragment extends Fragment implements VanillaMemeListener {
-    List<MobileTextView> mMobileTextViewList = new ArrayList<>();
+    List<MobileEditText> mMobileTextViewList = new ArrayList<>();
+    private float dX;
+    private float dY;
 
     @Nullable
     @Override
@@ -33,12 +37,40 @@ public class VanilleMemeFragment extends Fragment implements VanillaMemeListener
     }
 
     @Override
-    public void addTextView() {
-        ViewGroup rootView = (ViewGroup) getView();
-        MobileTextView mobileTextView = new MobileTextView(getActivity(),rootView);
-        mobileTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        mMobileTextViewList.add(mobileTextView);
-        rootView.addView(mobileTextView);
+    public void addMobileEditText() {
+        final ViewGroup rootView = (ViewGroup) getView().findViewById(R.id.fragement_vanilla_meme);
+        rootView.setOnClickListener(view -> rootView.requestFocus());
+        final MobileEditText mobileEditText = new MobileEditText(getActivity(), getView().findViewById(R.id.activity_main));
+        mobileEditText.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        mobileEditText.setOnLongClickListener(view -> {
+            mobileEditText.setOnTouchListener((view1, motionEvent) -> {
+                switch (motionEvent.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+
+                        dX = view1.getX() - motionEvent.getRawX();
+                        dY = view1.getY() - motionEvent.getRawY();
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+
+                        view1.animate()
+                                .x(motionEvent.getRawX() + dX)
+                                .y(motionEvent.getRawY() + dY)
+                                .setDuration(0)
+                                .start();
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            });
+            return true;
+        });
+        mobileEditText.setOnClickListener(view -> mobileEditText.setEnabled(true));
+        mMobileTextViewList.add(mobileEditText);
+
+        rootView.addView(mobileEditText);
     }
 
     @Override

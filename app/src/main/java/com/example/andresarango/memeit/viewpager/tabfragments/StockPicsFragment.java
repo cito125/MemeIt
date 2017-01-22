@@ -54,7 +54,7 @@ public class StockPicsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<MemeResponse> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
     }

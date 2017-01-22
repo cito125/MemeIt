@@ -1,8 +1,10 @@
 package com.example.andresarango.memeit.viewpager.tabfragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
+    private static final int PHOTO_ID = 22;
     private View rootView;
     LinearLayout createMemeFromCamera;
     LinearLayout makeMemeFromGalleryButton;
@@ -35,7 +38,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    private void initializeButtons(View rootView){
+    private void initializeButtons(View rootView) {
         createMemeFromCamera = (LinearLayout) rootView.findViewById(R.id.make_meme_from_camera);
         createMemeFromCamera.setOnClickListener(this);
         makeMemeFromGalleryButton = (LinearLayout) rootView.findViewById(R.id.make_meme_from_gallery_button);
@@ -46,8 +49,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.make_meme_from_camera:
+                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intentCamera, PHOTO_ID);
                 break;
             case R.id.make_meme_from_gallery_button:
                 Intent intent = new Intent();
@@ -72,5 +77,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             intent.putExtra("ImageString", uri.toString());
             startActivity(intent);
         }
+        if (requestCode == PHOTO_ID && resultCode == RESULT_OK) {
+            this.sendPicture(data);
+
+        }
+    }
+
+    private void sendPicture(Intent intent) {
+        Bundle intentExtras = intent.getExtras();
+        Bitmap picture = (Bitmap) intentExtras.get("data");
+        Uri pictureUri = intent.getData();
+        Intent intentCam = new Intent(rootView.getContext(), EditMemeActivity.class);
+        intent.putExtra("CameraPhotoUri", pictureUri.toString());
+        intent.putExtra("BitmapCamera", picture);
+        startActivity(intentCam);
+
     }
 }

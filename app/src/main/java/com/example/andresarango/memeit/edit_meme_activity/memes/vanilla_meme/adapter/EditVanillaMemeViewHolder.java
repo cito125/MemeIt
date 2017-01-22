@@ -29,7 +29,7 @@ public class EditVanillaMemeViewHolder extends RecyclerView.ViewHolder {
         return view -> {
             switch (integer){
                 case 0:
-                    mListener.addTextView();
+                    mListener.addMobileEditText();
                     break;
                 case 1:
                     mListener.changeTextColor();

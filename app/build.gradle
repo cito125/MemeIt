@@ -46,6 +46,7 @@ dependencies {
 
     compile 'com.github.QuadFlask:colorpicker:0.0.12'
 
+    compile 'com.github.nisrulz:sensey:1.5.1'
     compile 'nl.qbusict:cupboard:2.1.4'
 
     testCompile 'junit:junit:4.12'
