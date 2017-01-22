@@ -141,8 +141,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("image/*");
                         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri));  //need to add URI
-                        String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
-                        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                         startActivity(Intent.createChooser(intent, "Share via"));
 
                     }
