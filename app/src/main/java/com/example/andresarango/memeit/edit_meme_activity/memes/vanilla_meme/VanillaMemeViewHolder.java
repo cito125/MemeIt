@@ -16,6 +16,7 @@ public class VanillaMemeViewHolder extends EditorViewHolder {
     private VanillaMemeListener mVanillaLister;
     @Override
     public RecyclerView.Adapter getAdapter() {
+        System.out.println("yoooo");
         return new EditVanillaMemeAdapter(mVanillaLister);
     }
 

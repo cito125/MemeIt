@@ -1,13 +1,11 @@
-package com.example.andresarango.memeit.danny;
+package com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme;
 
+import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +24,8 @@ import java.util.List;
 public class DragMemeFragment extends Fragment {
     public static final String IMAGE_KEY = "image.key";
     private View rootView;
-    private RelativeLayout surfaceViewContainer;
+    public DragMemeAdapter dragMemeAdapter;
     private Bitmap image;
-    private MySurfaceView mySurfaceView;
 
     public static DragMemeFragment newInstance(@Nullable Parcelable bmp) {
         DragMemeFragment dragMemeFragment = new DragMemeFragment();
@@ -45,85 +42,73 @@ public class DragMemeFragment extends Fragment {
         return rootView;
     }
 
-//    public void readyForSave(){
-//        Intent intent = new Intent(rootView.getContext(), SaveActivity.class);
-//        startActivity(intent);
-//    }
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         image = getArguments().getParcelable(IMAGE_KEY);
-        setupToolkit();
-        addSurfaceViewToFragment();
-        setupRecyclerView();
+        setupSurfaceView();
+        setupAdapter();
+        setupTopBar();
     }
 
-    private void addSurfaceViewToFragment() {
-        surfaceViewContainer = (RelativeLayout) rootView.findViewById(R.id.sv_container) ;
+    private void setupSurfaceView() {
+        RelativeLayout surfaceViewContainer = (RelativeLayout) rootView.findViewById(R.id.sv_container) ;
 
         // Image goes behind/under the surface view
         ImageView backgroundImage = (ImageView) rootView.findViewById(R.id.bg_photo);
         backgroundImage.setImageBitmap(image);
 
         // Sets the surface view on top and transparent
-        //mySurfaceView = new MySurfaceView(getActivity(), image, this);
-        mySurfaceView = new MySurfaceView(getActivity(), image, this);
+        MySurfaceView mySurfaceView = new MySurfaceView(getActivity(), image, this);
         mySurfaceView.setZOrderOnTop(true);
         mySurfaceView.getHolder().setFormat(PixelFormat.TRANSPARENT);
         surfaceViewContainer.addView(mySurfaceView);
     }
 
-    private void setupRecyclerView() {
+    private void setupAdapter() {
         List<Integer> iconIds = Arrays.asList(
                 R.drawable.drag_icon_jj, R.drawable.drag_icon_josev, R.drawable.drag_icon_andres, R.drawable.drag_icon_helen,
                 R.drawable.drag_icon_lily, R.drawable.drag_icon_lilycat, R.drawable.drag_icon_jordan, R.drawable.drag_icon_jon,
                 R.drawable.drag_icon_eddie, R.drawable.drag_icon_shannon, R.drawable.drag_icon_mila, R.drawable.drag_icon_ashique2
         );
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new DragMemeAdapter(mySurfaceView, iconIds));
-
+        dragMemeAdapter = new DragMemeAdapter(iconIds);
     }
 
-    private void setupToolkit() {
+    public DragMemeAdapter getDragMemeAdapter() {
+        return dragMemeAdapter;
+    }
+
+    private void setupTopBar() {
         ImageView undoIv = (ImageView) rootView.findViewById(R.id.undo);
         ImageView clearIv = (ImageView) rootView.findViewById(R.id.clear);
         ImageView saveIv = (ImageView) rootView.findViewById(R.id.save);
 
-        undoIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mySurfaceView.undo();
-            }
-        });
+        // Yellow button to undo last added icon
+        undoIv.setOnClickListener(view -> MySurfaceView.instance.undo());
 
-        clearIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mySurfaceView.clear();
-            }
-        });
+        // Red button to clear all icons
+        clearIv.setOnClickListener(view -> MySurfaceView.instance.clear());
 
-        saveIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mySurfaceView.save();
-            }
-        });
+        // Saves image to a bitmap TODO but doesn't go anywhere with it
+        saveIv.setOnClickListener(view -> MySurfaceView.instance.save());
 
     }
+
+//    public void readyForSave(){
+//        Intent intent = new Intent(rootView.getContext(), SaveActivity.class);
+//        startActivity(intent);
+//    }
 
     @Override
     public void onPause() {
         super.onPause();
-        mySurfaceView.onPause();
+        MySurfaceView.instance.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mySurfaceView.onResume();
+        MySurfaceView.instance.onResume();
     }
 }
