@@ -26,6 +26,7 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.Van
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
 import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme.ExpectationMemeWrapper;
+import com.example.andresarango.memeit.leigh.DrawMemeWrapper;
 
 import java.io.IOException;
 
@@ -116,6 +117,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         fragmentAdapter = new FragmentAdapter(this);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DrawMemeWrapper());
         mRecyclerView.setAdapter(fragmentAdapter);
         mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }

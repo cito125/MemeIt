@@ -6,12 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.example.andresarango.memeit.EditMemeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,7 @@ import java.util.List;
  * Created by leighdouglas on 1/20/17.
  */
 
-public class DrawingView extends View  {
+public class DrawingView extends View implements EditDrawViewHolder.Listener {
 
     private Path path;
     private Paint paint;
@@ -102,6 +99,7 @@ public class DrawingView extends View  {
         return true;
     }
 
+    @Override
     public void undo() {
         if(moves.size() > 0){
             moves.remove(moves.size()-1);
