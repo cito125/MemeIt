@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Uri uri = data.getData();
             Intent intent = new Intent(rootView.getContext(), EditMemeActivity.class);
             intent.putExtra("ImageString", uri.toString());
+            intent.putExtra("TypeOfPicture", 1);
             startActivity(intent);
         }
         if (requestCode == PHOTO_ID && resultCode == RESULT_OK) {
@@ -88,8 +89,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Bitmap picture = (Bitmap) intentExtras.get("data");
         Uri pictureUri = intent.getData();
         Intent intentCam = new Intent(rootView.getContext(), EditMemeActivity.class);
-        intent.putExtra("CameraPhotoUri", pictureUri.toString());
-        intent.putExtra("BitmapCamera", picture);
+        intentCam.putExtra("CameraPhotoUri", pictureUri.toString());
+        intentCam.putExtra("BitmapCamera", picture);
+        intentCam.putExtra("TypeOfPicture", 0);
         startActivity(intentCam);
 
     }

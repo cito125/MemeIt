@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,7 +32,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
     private String memeURL;
-
     private Bitmap memeImageBitmap;
 
 
@@ -42,7 +40,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
 
-        memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
+
 
 //        How to make danny meme fragment below, make instance of my fragment with bitmap and inflate it
 //        DragMemeFragment dragMemeFragment = DragMemeFragment.newInstance(memeImageBitmap);
@@ -51,6 +49,21 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 //                .commit();
 
         initialize(savedInstanceState);
+
+        Intent intent = getIntent();
+        int picKey = intent.getIntExtra("TypeOfPicture",5);
+        if(picKey == 1){
+            memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
+            memeImage.setImageBitmap(memeImageBitmap);
+        }
+        if(picKey == 0){
+            String newString = intent.getStringExtra("CameraPhotoUri");
+            memeImageBitmap = getBitmapFromUri(newString);
+            memeImage.setImageBitmap(memeImageBitmap);
+        }
+        if(picKey == 3){
+            loadStockImage();
+        }
     }
 
     private Bitmap getBitmapFromUri(String imageUriString) {
@@ -129,13 +142,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         startFragment(null, memeFragment);
     }
 
-    private void showPicture() {
-        Bitmap picture = getIntent().getParcelableExtra("BitmapCamera");
-        Uri pictureUri = Uri.parse(getIntent().getStringExtra("CameraPhotoUri"));
-        if (picture != null) {
-            memeImage.setImageBitmap(picture);
-        }
-    }
 
     private void loadStockImage() {
         Intent intent = getIntent();
