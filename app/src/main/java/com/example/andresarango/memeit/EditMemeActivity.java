@@ -116,8 +116,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         fragmentAdapter = new FragmentAdapter(this);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
-
-
         mRecyclerView.setAdapter(fragmentAdapter);
         mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }
