@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-<<<<<<< HEAD
+
 import android.provider.MediaStore;
-=======
->>>>>>> 96da302803d347e40b5e6804f962d702262e8d54
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -113,7 +110,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         }
     }
 
-    @NonNull
     private View.OnClickListener onClick() {
         return view -> {
             Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
