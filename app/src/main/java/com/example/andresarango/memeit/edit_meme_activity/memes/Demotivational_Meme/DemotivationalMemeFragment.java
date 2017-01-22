@@ -1,10 +1,10 @@
 package com.example.andresarango.memeit.edit_meme_activity.memes.demotivational_meme;
 
+import android.app.Fragment;
 import android.content.pm.ActivityInfo;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,14 +29,11 @@ public class DemotivationalMemeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRoot = inflater.inflate(R.layout.fragment_demotivational_meme, container, false);
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        initialize();
         return mRoot;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initialize();
-    }
+
 
     private void initialize() {
         largeTextDemotivate = (EditText) mRoot.findViewById(R.id.demot_largetext);

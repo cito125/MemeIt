@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
+import com.example.andresarango.memeit.edit_meme_activity.memes.demotivational_meme.DemotivationalMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme.DragMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme.ExpectationMemeWrapper;
@@ -160,6 +161,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DragMemeWrapper(mMemeImageBitmap));
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DrawMemeWrapper());
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DemotivationalMemeWrapper());
         mRecyclerView.setAdapter(fragmentAdapter);
         mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }
