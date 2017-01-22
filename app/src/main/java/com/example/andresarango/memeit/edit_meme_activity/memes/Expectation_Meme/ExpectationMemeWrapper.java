@@ -12,12 +12,12 @@ import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
  */
 
 public class ExpectationMemeWrapper implements MemeWrapper {
-    ExpectationMemeFragment expectationMemeFragment = new ExpectationMemeFragment();
+    ExpectationMemeFragment ExpectationMemeFragment = new ExpectationMemeFragment();
 
     @Override
     public EditorViewHolder getViewHolder(ViewGroup parent, EditorViewHolder.Listener listener) {
         return new ExpectationMemeViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.viewholder_expectation_meme, parent, false),listener,expectationMemeFragment);
+                .inflate(R.layout.viewholder_expectation_meme, parent, false),listener,ExpectationMemeFragment);
     }
 }
