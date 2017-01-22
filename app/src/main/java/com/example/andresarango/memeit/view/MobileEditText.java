@@ -1,6 +1,7 @@
 package com.example.andresarango.memeit.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
 
@@ -23,7 +24,7 @@ public class MobileEditText extends EditText {
         super(context);
         mParentView = view;
         setHint(mHintString);
-        setBackgroundResource(R.color.white);
+        setBackground(null);
     }
 
 }

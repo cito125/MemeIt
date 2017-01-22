@@ -28,7 +28,6 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
-import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_Meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.leigh.DrawMemeWrapper;
 import com.squareup.picasso.Picasso;
 
