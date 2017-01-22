@@ -2,11 +2,13 @@ package com.example.andresarango.memeit;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
@@ -38,6 +41,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
     private Toolbar editMemeToolbar;
+    private RelativeLayout rl;
 
     private Bitmap memeImageBitmap;
 
@@ -83,6 +87,8 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         editMemeToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(editMemeToolbar);
 
+        rl = (RelativeLayout) findViewById(R.id.meme_to_be_saved);
+
         VanillaMemeWrapper vanillaMemeWrapper = new VanillaMemeWrapper();
 
         startFragment(savedInstanceState, vanillaMemeWrapper.getFragment());
@@ -103,7 +109,29 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.next:
-                Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        rl.setDrawingCacheEnabled(true);
+                        Bitmap b = rl.getDrawingCache();
+
+                        String uri = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), b, "image1", "an image");
+
+                        MemeDatabaseHelper memeDatabaseHelper = MemeDatabaseHelper.getInstance(getApplicationContext());
+                        SQLiteDatabase sqLiteDatabase = memeDatabaseHelper.getSQLiteDatabase(memeDatabaseHelper);
+                        memeDatabaseHelper.addMeme(new MemeURI(uri), sqLiteDatabase);
+
+                    }
+                });
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("image/jpeg");
+                //intent.putExtra(Intent.EXTRA_STREAM, pictureUri);  //need to add URI
+                String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
+                intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(intent, "Share via"));
+
             default:
                 return super.onOptionsItemSelected(item);
         }
