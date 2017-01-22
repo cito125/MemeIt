@@ -18,6 +18,7 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListe
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.squareup.picasso.Picasso;
 
 public class EditMemeActivity extends AppCompatActivity implements EditorViewHolder.Listener {
 
@@ -28,6 +29,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Button mChooseMemeButton;
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
+    private String memeURL;
 
 
     @Override
@@ -109,5 +111,13 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         if (picture != null) {
             memeImage.setImageBitmap(picture);
         }
+    }
+
+    private void loadStockImage() {
+        Intent intent = getIntent();
+        memeURL = intent.getStringExtra("urlMe");
+        Picasso.with(this)
+                .load(memeURL)
+                .into(memeImage);
     }
 }
