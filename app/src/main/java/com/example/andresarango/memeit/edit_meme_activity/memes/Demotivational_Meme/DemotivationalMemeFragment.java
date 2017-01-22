@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.edit_meme_activity.memes.Demotivational_Meme;
+package com.example.andresarango.memeit.edit_meme_activity.memes.demotivational_meme;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Paint;
