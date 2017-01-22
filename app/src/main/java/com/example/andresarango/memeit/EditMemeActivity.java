@@ -2,8 +2,12 @@ package com.example.andresarango.memeit;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +20,8 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.Van
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
 
+import java.io.IOException;
+
 public class EditMemeActivity extends AppCompatActivity implements EditorViewHolder.Listener {
 
     private RecyclerView mRecyclerView;
@@ -26,12 +32,34 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
 
+    private Bitmap memeImageBitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
+
+        memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
+
+//        How to make danny meme fragment below, make instance of my fragment with bitmap and inflate it
+//        DragMemeFragment dragMemeFragment = DragMemeFragment.newInstance(memeImageBitmap);
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.activity_create_meme, dragMemeFragment)
+//                .commit();
+
         initialize(savedInstanceState);
+    }
+
+    private Bitmap getBitmapFromUri(String imageUriString) {
+        Bitmap bitmap = null;
+        Uri imageUri = Uri.parse(imageUriString);
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 
 
@@ -47,6 +75,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
         startFragment(savedInstanceState, vanillaMemeWrapper.getFragment());
         setUpRecyclerView(vanillaMemeWrapper);
+
 
         mNextActivityButton.setOnClickListener(onClick());
     }
@@ -81,6 +110,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         }
     }
 
+    @NonNull
     private View.OnClickListener onClick() {
         return view -> {
             Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
