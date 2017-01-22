@@ -2,11 +2,10 @@ package com.example.andresarango.memeit;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,14 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
-import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme.ExpectationMemeWrapper;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -38,6 +37,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Button mChooseMemeButton;
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
+    private String memeURL;
     private Toolbar editMemeToolbar;
 
     private Bitmap memeImageBitmap;
@@ -48,7 +48,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
 
-        memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
+
 
 //        How to make danny meme fragment below, make instance of my fragment with bitmap and inflate it
 //        DragMemeFragment dragMemeFragment = DragMemeFragment.newInstance(memeImageBitmap);
@@ -57,6 +57,21 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 //                .commit();
 
         initialize(savedInstanceState);
+
+        Intent intent = getIntent();
+        int picKey = intent.getIntExtra("TypeOfPicture",5);
+        if(picKey == 1){
+            memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
+            memeImage.setImageBitmap(memeImageBitmap);
+        }
+        if(picKey == 0){
+            String newString = intent.getStringExtra("CameraPhotoUri");
+            memeImageBitmap = getBitmapFromUri(newString);
+            memeImage.setImageBitmap(memeImageBitmap);
+        }
+        if(picKey == 3){
+            loadStockImage();
+        }
     }
 
     private Bitmap getBitmapFromUri(String imageUriString) {
@@ -158,11 +173,12 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         startFragment(null, memeFragment);
     }
 
-    private void showPicture() {
-        Bitmap picture = getIntent().getParcelableExtra("BitmapCamera");
-        Uri pictureUri = Uri.parse(getIntent().getStringExtra("CameraPhotoUri"));
-        if (picture != null) {
-            memeImage.setImageBitmap(picture);
-        }
+
+    private void loadStockImage() {
+        Intent intent = getIntent();
+        memeURL = intent.getStringExtra("urlMe");
+        Picasso.with(this)
+                .load(memeURL)
+                .into(memeImage);
     }
 }
