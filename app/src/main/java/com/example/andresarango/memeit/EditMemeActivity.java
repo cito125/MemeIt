@@ -43,12 +43,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
         mMemeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
 
-//        How to make danny meme fragment below, make instance of my fragment with bitmap and inflate it
-//        DragMemeFragment dragMemeFragment = DragMemeFragment.newInstance(mMemeImageBitmap);
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.activity_create_meme, dragMemeFragment)
-//                .commit();
-
         initialize(savedInstanceState);
     }
 

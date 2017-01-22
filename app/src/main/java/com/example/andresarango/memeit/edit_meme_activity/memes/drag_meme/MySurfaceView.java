@@ -29,14 +29,17 @@ public class MySurfaceView extends SurfaceView implements Runnable, View.OnTouch
     private Bitmap backgroundImage;
 
     private Canvas canvas = null;
-    public static Bitmap lastCanvas = null;
+    public static Bitmap lastSavedImage = null;
 
     public DragMemeFragment dragMemeFragment;
     private boolean isScaling = false;
 
+    public static MySurfaceView instance;
+
     public MySurfaceView(Context context, Bitmap bmp, DragMemeFragment dragMemeFragment) {
         super(context);
         this.dragMemeFragment = dragMemeFragment;
+        instance = this;
         backgroundImage = bmp;
         setOnTouchListener(this);
         holder = getHolder();
@@ -50,8 +53,8 @@ public class MySurfaceView extends SurfaceView implements Runnable, View.OnTouch
                 continue;
             }
             canvas = holder.lockCanvas();
-            if (lastCanvas == null) {
-                lastCanvas = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.RGB_565);
+            if (lastSavedImage == null) {
+                lastSavedImage = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.RGB_565);
                 backgroundImage = Bitmap.createScaledBitmap(backgroundImage, canvas.getWidth(), canvas.getHeight(), false);
             }
             canvas.drawColor(0, PorterDuff.Mode.CLEAR);
@@ -202,14 +205,14 @@ public class MySurfaceView extends SurfaceView implements Runnable, View.OnTouch
     public void save() {
         //dragMemeFragment.readyForSave();
 
-        canvas.setBitmap(lastCanvas);
+        canvas.setBitmap(lastSavedImage);
         canvas.drawBitmap(backgroundImage, 0, 0, null);
         Iterator<MoveableIcon> it = iconStack.iterator();
         while (it.hasNext()) {
             isIteratingStack = true;
             MoveableIcon moveableIcon = it.next();
             Bitmap bitmap = moveableIcon.getBitmap();
-            canvas.setBitmap(lastCanvas);
+            canvas.setBitmap(lastSavedImage);
             canvas.drawBitmap(bitmap, moveableIcon.getxPos() - bitmap.getWidth() / 2, moveableIcon.getyPos() - bitmap.getHeight() / 2, null);
         }
     }
