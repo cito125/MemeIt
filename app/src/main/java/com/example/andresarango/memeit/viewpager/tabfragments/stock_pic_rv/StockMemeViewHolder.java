@@ -37,15 +37,6 @@ public class StockMemeViewHolder extends RecyclerView.ViewHolder {
                 .load(stockMemeURL)
                 .fit()
                 .into(stockMemeIV);
-
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(itemView.getContext(), EditMemeActivity.class);
-                intent.putExtra("MemeUrl", meme.getUrl());
-                itemView.getContext().startActivity(intent);
-            }
-        });
     }
 
 }
