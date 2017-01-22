@@ -9,14 +9,14 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="323dp"
+            android:layout_height="500dp"
             android:background="@drawable/demotivational_template"
             android:id="@+id/imageView" />
 
         <ImageView
             android:id="@+id/demotivational_iv"
             android:layout_width="280dp"
-            android:layout_height="189dp"
+            android:layout_height="250dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="33dp" />
@@ -44,7 +44,7 @@
             android:inputType="textImeMultiLine|textAutoComplete|textCapSentences"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:layout_alignBottom="@+id/imageView"
+            android:layout_below="@id/demot_largetext"
             android:layout_centerHorizontal="true"
             android:background="@null"/>
 
