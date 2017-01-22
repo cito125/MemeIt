@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
 

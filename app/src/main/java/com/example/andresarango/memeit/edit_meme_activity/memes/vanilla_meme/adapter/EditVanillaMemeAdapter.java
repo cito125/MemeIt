@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeListener;
 
 import java.util.ArrayList;
 import java.util.List;
