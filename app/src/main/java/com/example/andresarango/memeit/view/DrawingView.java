@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.model.custom_views;
+package com.example.andresarango.memeit.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
