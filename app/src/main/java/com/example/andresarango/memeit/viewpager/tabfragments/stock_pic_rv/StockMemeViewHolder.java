@@ -1,9 +1,11 @@
 package com.example.andresarango.memeit.viewpager.tabfragments.stock_pic_rv;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.andresarango.memeit.EditMemeActivity;
 import com.example.andresarango.memeit.R;
 import com.example.andresarango.memeit.model.imgflip_json.Meme;
 import com.squareup.picasso.Picasso;
@@ -34,6 +36,15 @@ public class StockMemeViewHolder extends RecyclerView.ViewHolder {
                 .load(stockMemeURL)
                 .fit()
                 .into(stockMemeIV);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(itemView.getContext(), EditMemeActivity.class);
+                intent.putExtra("MemeUrl", meme.getUrl());
+                itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
 }

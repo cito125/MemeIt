@@ -17,8 +17,9 @@ import java.util.List;
  * Created by dannylui on 1/21/17.
  */
 
-public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.DragMemeViewHolder> {
+public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.EditDragMemeViewHolder> {
     private List<Integer> faces = new ArrayList<>();
+
     private MySurfaceView mySurfaceView = null;
 
     public DragMemeAdapter(MySurfaceView mySurfaceView, List<Integer> faces) {
@@ -26,14 +27,18 @@ public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.DragMe
         this.faces = faces;
     }
 
-    @Override
-    public DragMemeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_drag_meme, parent, false);
-        return new DragMemeViewHolder(itemView);
+    public void setMySurfaceView(MySurfaceView mySurfaceView) {
+        this.mySurfaceView = mySurfaceView;
     }
 
     @Override
-    public void onBindViewHolder(DragMemeViewHolder holder, int position) {
+    public EditDragMemeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_edit_drag_meme, parent, false);
+        return new EditDragMemeViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(EditDragMemeViewHolder holder, int position) {
         holder.bind(faces.get(position));
     }
 
@@ -42,10 +47,10 @@ public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.DragMe
         return faces.size();
     }
 
-    public class DragMemeViewHolder extends RecyclerView.ViewHolder {
+    public class EditDragMemeViewHolder extends RecyclerView.ViewHolder {
         private ImageView iconIv;
 
-        public DragMemeViewHolder(View itemView) {
+        public EditDragMemeViewHolder(View itemView) {
             super(itemView);
             iconIv = (ImageView) itemView.findViewById(R.id.icon_image);
         }
