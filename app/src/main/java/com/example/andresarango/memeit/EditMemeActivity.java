@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme.DragMemeWrapper;
@@ -87,6 +87,9 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         fragmentAdapter = new FragmentAdapter(this);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DragMemeWrapper(mMemeImageBitmap));
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
+
+
         mRecyclerView.setAdapter(fragmentAdapter);
         mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }
@@ -112,7 +115,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         }
     }
 
-    @NonNull
     private View.OnClickListener onClick() {
         return view -> {
             Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
@@ -134,5 +136,13 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     @Override
     public void swapFragment(Fragment memeFragment) {
         startFragment(null, memeFragment);
+    }
+
+    private void showPicture() {
+        Bitmap picture = getIntent().getParcelableExtra("BitmapCamera");
+        Uri pictureUri = Uri.parse(getIntent().getStringExtra("CameraPhotoUri"));
+        if (picture != null) {
+            memeImage.setImageBitmap(picture);
+        }
     }
 }
