@@ -20,15 +20,8 @@ import java.util.List;
 public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.EditDragMemeViewHolder> {
     private List<Integer> faces = new ArrayList<>();
 
-    private MySurfaceView mySurfaceView = null;
-
-    public DragMemeAdapter(MySurfaceView mySurfaceView, List<Integer> faces) {
-        this.mySurfaceView = mySurfaceView;
+    public DragMemeAdapter(List<Integer> faces) {
         this.faces = faces;
-    }
-
-    public void setMySurfaceView(MySurfaceView mySurfaceView) {
-        this.mySurfaceView = mySurfaceView;
     }
 
     @Override
@@ -63,7 +56,7 @@ public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.EditDr
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mySurfaceView.addIcon(icon);
+                    MySurfaceView.instance.addIcon(icon);
                 }
             });
         }
