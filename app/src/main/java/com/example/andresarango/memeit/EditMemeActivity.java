@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
@@ -85,6 +86,9 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         fragmentAdapter = new FragmentAdapter(this);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
+
+
         mRecyclerView.setAdapter(fragmentAdapter);
         mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }
