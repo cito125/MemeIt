@@ -2,6 +2,7 @@ package com.example.andresarango.memeit;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
@@ -28,6 +33,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Button mChooseMemeButton;
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
+    private Toolbar editMemeToolbar;
 
 
     @Override
@@ -40,11 +46,16 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     private void initialize(Bundle savedInstanceState) {
         memeImage = (ImageView) findViewById(R.id.meme_image);
-        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
+//        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
         mChooseMemeButton = (Button) findViewById(R.id.btn_choose_meme);
         mEditMemeButton = (Button) findViewById(R.id.btn_edit_meme);
         mChooseMemeButton.setOnClickListener(onClickButton());
         mEditMemeButton.setOnClickListener(onClickButton());
+
+        editMemeToolbar = (Toolbar) findViewById(R.id.edit_activity_toolbar);
+        editMemeToolbar.setTitle("Edit your meme");
+        editMemeToolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(editMemeToolbar);
 
         VanillaMemeWrapper vanillaMemeWrapper = new VanillaMemeWrapper();
 
@@ -52,7 +63,24 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         setUpRecyclerView(vanillaMemeWrapper);
 
 
-        mNextActivityButton.setOnClickListener(onClick());
+//        mNextActivityButton.setOnClickListener(onClick());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.next:
+                Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setUpRecyclerView(VanillaMemeWrapper vanillaMemeWrapper) {

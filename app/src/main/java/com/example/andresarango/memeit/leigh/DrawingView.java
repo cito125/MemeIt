@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.model.custom_views;
+package com.example.andresarango.memeit.leigh;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,6 +25,7 @@ public class DrawingView extends View  {
     private Path path;
     private Paint paint;
     private Bitmap mBitmap;
+    public static DrawingView drawingView;
 
     private Canvas mCanvas;
 
@@ -32,6 +33,7 @@ public class DrawingView extends View  {
 
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        drawingView = this;
         setUpPaint();
         path = new Path();
 
@@ -65,7 +67,6 @@ public class DrawingView extends View  {
         for (Path path : moves) {
             canvas.drawPath(path, paint);
         }
-
     }
 
     @Override
@@ -101,11 +102,10 @@ public class DrawingView extends View  {
         return true;
     }
 
-//    @Override
-//    public void undo() {
-//        if(moves.size() > 0){
-//            moves.remove(moves.size()-1);
-//            invalidate();
-//        }
-//    }
+    public void undo() {
+        if(moves.size() > 0){
+            moves.remove(moves.size()-1);
+            invalidate();
+        }
+    }
 }
