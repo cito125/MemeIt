@@ -3,7 +3,7 @@ package com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.ad
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeListener;
 
 /**
  * Created by andresarango on 1/21/17.

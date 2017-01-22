@@ -26,14 +26,14 @@
         <ImageView
             android:id="@+id/meme_image"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="400dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitXY" />
 
         <FrameLayout
             android:id="@+id/meme_overlay_fragment"
             android:layout_width="match_parent"
-            android:layout_height="350dp" />
+            android:layout_height="400dp" />
 
     </RelativeLayout>
 
@@ -67,7 +67,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/meme_rv"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="75dp"
         android:layout_above="@id/meme_or_edit_buttons" />
 
 </RelativeLayout>

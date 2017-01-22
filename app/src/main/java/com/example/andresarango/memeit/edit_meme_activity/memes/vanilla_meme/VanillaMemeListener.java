@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.edit_meme_activity.memes;
+package com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme;
 
 /**
  * Created by andresarango on 1/20/17.

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:background="@drawable/text_icon"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/icon_image"
+    android:layout_width="65dp"
+    android:layout_height="65dp"
+    android:layout_gravity="center"
+    android:layout_margin="5dp"
+    android:background="@drawable/icon_drag">
 
-</FrameLayout>
+</ImageView>

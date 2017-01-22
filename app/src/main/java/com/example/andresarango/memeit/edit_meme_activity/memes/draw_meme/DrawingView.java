@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.leigh;
+package com.example.andresarango.memeit.edit_meme_activity.memes.draw_meme;
 
 import android.content.Context;
 import android.graphics.Bitmap;
