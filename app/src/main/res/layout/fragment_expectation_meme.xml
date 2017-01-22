@@ -31,10 +31,12 @@
                 android:clickable="true"/>
             <EditText
                 android:textStyle="bold"
+                android:focusableInTouchMode="true"
                 android:imeOptions="actionDone"
                 android:textSize="20dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
+                android:maxLines="1"
                 android:gravity="center"
                 android:hint="Title Your Meme"
                 android:id="@+id/title_edit_text"
