@@ -14,6 +14,9 @@ public class DrawMemeViewHolder extends EditorViewHolder {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
+        if(mDrawListener != null){
+            System.out.println("yo");
+        }
         return new DrawAdapter(mDrawListener);
     }
 
