@@ -1,13 +1,11 @@
 package com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme;
 
+import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +27,14 @@ public class DragMemeFragment extends Fragment {
     private RelativeLayout surfaceViewContainer;
     private Bitmap image;
     private MySurfaceView mySurfaceView;
+    public DragMemeAdapter dragMemeAdapter;
 
     public static DragMemeFragment newInstance(@Nullable Parcelable bmp) {
         DragMemeFragment dragMemeFragment = new DragMemeFragment();
         Bundle args = new Bundle();
         args.putParcelable(IMAGE_KEY, bmp);
         dragMemeFragment.setArguments(args);
+
         return dragMemeFragment;
     }
 
@@ -71,7 +71,9 @@ public class DragMemeFragment extends Fragment {
         mySurfaceView = new MySurfaceView(getActivity(), image, this);
         mySurfaceView.setZOrderOnTop(true);
         mySurfaceView.getHolder().setFormat(PixelFormat.TRANSPARENT);
+        dragMemeAdapter.setMySurfaceView(mySurfaceView);
         surfaceViewContainer.addView(mySurfaceView);
+
     }
 
     private void setupRecyclerView() {
@@ -81,11 +83,18 @@ public class DragMemeFragment extends Fragment {
                 R.drawable.drag_icon_eddie, R.drawable.drag_icon_shannon, R.drawable.drag_icon_mila, R.drawable.drag_icon_ashique2
         );
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new DragMemeAdapter(mySurfaceView, iconIds));
+        dragMemeAdapter = new DragMemeAdapter(mySurfaceView, iconIds);
+
+//        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        recyclerView.setAdapter(new DragMemeAdapter(mySurfaceView, iconIds));
 
     }
+
+    public DragMemeAdapter getDragMemeAdapter() {
+        return dragMemeAdapter;
+    }
+
 
     private void setupToolkit() {
         ImageView undoIv = (ImageView) rootView.findViewById(R.id.undo);
