@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.andresarango.memeit.view.DrawingView
+    <com.example.andresarango.memeit.leigh.DrawingView
         android:id="@+id/drawing_view"
         android:layout_width="match_parent"
         android:layout_height="400dp" />

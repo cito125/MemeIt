@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.view;
+package com.example.andresarango.memeit.leigh;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,12 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.example.andresarango.memeit.EditMemeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +17,12 @@ import java.util.List;
  * Created by leighdouglas on 1/20/17.
  */
 
-public class DrawingView extends View  {
+public class DrawingView extends View implements EditDrawViewHolder.Listener {
 
     private Path path;
     private Paint paint;
     private Bitmap mBitmap;
+    public static DrawingView drawingView;
 
     private Canvas mCanvas;
 
@@ -32,6 +30,7 @@ public class DrawingView extends View  {
 
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        drawingView = this;
         setUpPaint();
         path = new Path();
 
@@ -65,7 +64,6 @@ public class DrawingView extends View  {
         for (Path path : moves) {
             canvas.drawPath(path, paint);
         }
-
     }
 
     @Override
@@ -101,11 +99,11 @@ public class DrawingView extends View  {
         return true;
     }
 
-//    @Override
-//    public void undo() {
-//        if(moves.size() > 0){
-//            moves.remove(moves.size()-1);
-//            invalidate();
-//        }
-//    }
+    @Override
+    public void undo() {
+        if(moves.size() > 0){
+            moves.remove(moves.size()-1);
+            invalidate();
+        }
+    }
 }

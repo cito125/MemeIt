@@ -20,14 +20,15 @@ public class StockMemeViewHolder extends RecyclerView.ViewHolder {
     public StockMemeViewHolder(View itemView) {
         super(itemView);
         stockMemeIV = (ImageView) itemView.findViewById(R.id.stock_meme_iv);
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(itemView.getContext(), MemeActivity.class);
-//                intent.putExtra("urlMe", stockMemeURL);
-//                itemView.getContext().startActivity(intent);
-//            }
-//        });
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(itemView.getContext(), EditMemeActivity.class);
+                intent.putExtra("urlMe", stockMemeURL);
+                intent.putExtra("TypeOfPicture", 3);
+                itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     public void bind(Meme meme) {

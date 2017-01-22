@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_edit_meme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.andresarango.memeit.EditMemeActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/edit_activity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:title="Edit Meme">
+
+    </android.support.v7.widget.Toolbar>
+
     <RelativeLayout
         android:id="@+id/meme_to_be_saved"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_activity_toolbar">
 
         <ImageView
             android:id="@+id/meme_image"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />
 
         <FrameLayout
             android:id="@+id/meme_overlay_fragment"
             android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="350dp" />
 
     </RelativeLayout>
 
@@ -37,16 +49,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorPrimary"
             android:text="memes"
-            android:background="#00BFA5"/>
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btn_edit_meme"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/colorPrimary"
             android:text="edit"
-            android:background="#00BFA5"/>
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
@@ -55,14 +69,5 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_above="@id/meme_or_edit_buttons" />
-
-    <Button
-        android:id="@+id/btn_next_activity"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_above="@id/meme_rv"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/next_button" />
 
 </RelativeLayout>
