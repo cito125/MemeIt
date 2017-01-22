@@ -44,6 +44,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private String memeURL;
     private Toolbar editMemeToolbar;
     private RelativeLayout rl;
+    String uri;
 
     private Bitmap memeImageBitmap;
 
@@ -52,8 +53,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
-
-        memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
 
 //        How to make danny meme fragment below, make instance of my fragment with bitmap and inflate it
 //        DragMemeFragment dragMemeFragment = DragMemeFragment.newInstance(memeImageBitmap);
@@ -93,7 +92,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     private void initialize(Bundle savedInstanceState) {
         memeImage = (ImageView) findViewById(R.id.meme_image);
-//        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
         mChooseMemeButton = (Button) findViewById(R.id.btn_choose_meme);
         mEditMemeButton = (Button) findViewById(R.id.btn_edit_meme);
         mChooseMemeButton.setOnClickListener(onClickButton());
@@ -111,8 +109,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         startFragment(savedInstanceState, vanillaMemeWrapper.getFragment());
         setUpRecyclerView(vanillaMemeWrapper);
 
-
-//        mNextActivityButton.setOnClickListener(onClick());
     }
 
     @Override
@@ -133,7 +129,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
                         rl.setDrawingCacheEnabled(true);
                         Bitmap b = rl.getDrawingCache();
 
-                        String uri = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), b, "image1", "an image");
+                        uri = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), b, "image1", "an image");
 
                         MemeDatabaseHelper memeDatabaseHelper = MemeDatabaseHelper.getInstance(getApplicationContext());
                         SQLiteDatabase sqLiteDatabase = memeDatabaseHelper.getSQLiteDatabase(memeDatabaseHelper);
@@ -144,7 +140,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("image/jpeg");
-                //intent.putExtra(Intent.EXTRA_STREAM, pictureUri);  //need to add URI
+                intent.putExtra(Intent.EXTRA_STREAM, uri);  //need to add URI
                 String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
                 intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(intent, "Share via"));
