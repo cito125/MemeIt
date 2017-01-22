@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.danny;
+package com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme;
 
 import android.graphics.Bitmap;
 

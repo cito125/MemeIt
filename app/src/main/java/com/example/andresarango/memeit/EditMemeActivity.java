@@ -120,7 +120,12 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     @Override
     public void setEditMemeAdapter(RecyclerView.Adapter editMemeAdapter) {
-        mEditAdapter = editMemeAdapter;
+        if(editMemeAdapter != null) {
+            mEditAdapter = editMemeAdapter;
+            mEditMemeButton.setClickable(true);
+        }else{
+            mEditMemeButton.setEnabled(false);
+        }
     }
 
     @Override

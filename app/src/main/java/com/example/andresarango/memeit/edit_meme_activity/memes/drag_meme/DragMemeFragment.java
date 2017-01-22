@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.danny;
+package com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme;
 
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -92,26 +92,11 @@ public class DragMemeFragment extends Fragment {
         ImageView clearIv = (ImageView) rootView.findViewById(R.id.clear);
         ImageView saveIv = (ImageView) rootView.findViewById(R.id.save);
 
-        undoIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mySurfaceView.undo();
-            }
-        });
+        undoIv.setOnClickListener(view -> mySurfaceView.undo());
 
-        clearIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mySurfaceView.clear();
-            }
-        });
+        clearIv.setOnClickListener(view -> mySurfaceView.clear());
 
-        saveIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mySurfaceView.save();
-            }
-        });
+        saveIv.setOnClickListener(view -> mySurfaceView.save());
 
     }
 
