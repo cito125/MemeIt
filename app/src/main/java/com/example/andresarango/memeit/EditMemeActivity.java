@@ -1,14 +1,15 @@
 package com.example.andresarango.memeit;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,11 +27,12 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.demotivational_meme.DemotivationalMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme.DragMemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.memes.draw_meme.DrawMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme.ExpectationMemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
-import com.example.andresarango.memeit.edit_meme_activity.memes.draw_meme.DrawMemeWrapper;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -122,9 +124,12 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         switch (item.getItemId()) {
             case R.id.next:
 
-                Thread thread = new Thread(new Runnable() {
+                Thread thread = new
+                        Thread(new Runnable() {
                     @Override
                     public void run() {
+                        ActivityCompat.requestPermissions(EditMemeActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1 );
+
                         rl.setDrawingCacheEnabled(true);
                         Bitmap b = rl.getDrawingCache();
 
@@ -138,8 +143,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("image/*");
                         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri));  //need to add URI
-                        String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
-                        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                         startActivity(Intent.createChooser(intent, "Share via"));
 
                     }
