@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme;
+package com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -152,7 +152,7 @@ public class ExpectationMemeFragment extends android.app.Fragment implements Vie
                     e.printStackTrace();
                 }
                 Drawable bitmapDrawable = new BitmapDrawable(getResources(),bitmap);
-                imageB.setBackgroundDrawable(bitmapDrawable);;
+                imageB.setBackgroundDrawable(bitmapDrawable);
                 isImageBSet = true;
                 areButtonsSet();
                 wasImageBClicked = false;

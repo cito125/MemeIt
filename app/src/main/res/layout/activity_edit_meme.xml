@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitXY" />
 
         <FrameLayout
             android:id="@+id/meme_overlay_fragment"
@@ -67,7 +67,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/meme_rv"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_above="@id/meme_or_edit_buttons" />
+        android:layout_height="100dp"
+        android:layout_above="@id/meme_or_edit_buttons"
+        android:background="#BDBDBD"/>
 
 </RelativeLayout>
