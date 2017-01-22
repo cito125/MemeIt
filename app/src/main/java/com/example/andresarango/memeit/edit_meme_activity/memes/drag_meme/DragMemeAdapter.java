@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.danny;
+package com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,23 +17,21 @@ import java.util.List;
  * Created by dannylui on 1/21/17.
  */
 
-public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.DragMemeViewHolder> {
+public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.EditDragMemeViewHolder> {
     private List<Integer> faces = new ArrayList<>();
-    private MySurfaceView mySurfaceView = null;
 
-    public DragMemeAdapter(MySurfaceView mySurfaceView, List<Integer> faces) {
-        this.mySurfaceView = mySurfaceView;
+    public DragMemeAdapter(List<Integer> faces) {
         this.faces = faces;
     }
 
     @Override
-    public DragMemeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_drag_meme, parent, false);
-        return new DragMemeViewHolder(itemView);
+    public EditDragMemeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_edit_drag_meme, parent, false);
+        return new EditDragMemeViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(DragMemeViewHolder holder, int position) {
+    public void onBindViewHolder(EditDragMemeViewHolder holder, int position) {
         holder.bind(faces.get(position));
     }
 
@@ -42,10 +40,10 @@ public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.DragMe
         return faces.size();
     }
 
-    public class DragMemeViewHolder extends RecyclerView.ViewHolder {
+    public class EditDragMemeViewHolder extends RecyclerView.ViewHolder {
         private ImageView iconIv;
 
-        public DragMemeViewHolder(View itemView) {
+        public EditDragMemeViewHolder(View itemView) {
             super(itemView);
             iconIv = (ImageView) itemView.findViewById(R.id.icon_image);
         }
@@ -58,7 +56,7 @@ public class DragMemeAdapter extends RecyclerView.Adapter<DragMemeAdapter.DragMe
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mySurfaceView.addIcon(icon);
+                    MySurfaceView.instance.addIcon(icon);
                 }
             });
         }

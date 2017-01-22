@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.edit_meme_activity.memes.expectation_Meme;
+package com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

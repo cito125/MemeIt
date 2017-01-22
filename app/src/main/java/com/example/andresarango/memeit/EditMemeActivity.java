@@ -24,10 +24,11 @@ import android.widget.RelativeLayout;
 
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
+import com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme.DragMemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
-import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_Meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.leigh.DrawMemeWrapper;
 import com.squareup.picasso.Picasso;
 
@@ -46,7 +47,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Toolbar editMemeToolbar;
     private RelativeLayout rl;
 
-    private Bitmap memeImageBitmap;
+    private Bitmap mMemeImageBitmap;
 
 
     @Override
@@ -54,26 +55,18 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meme);
 
-        memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
-
-//        How to make danny meme fragment below, make instance of my fragment with bitmap and inflate it
-//        DragMemeFragment dragMemeFragment = DragMemeFragment.newInstance(memeImageBitmap);
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.activity_create_meme, dragMemeFragment)
-//                .commit();
-
         initialize(savedInstanceState);
 
         Intent intent = getIntent();
         int picKey = intent.getIntExtra("TypeOfPicture",5);
         if(picKey == 1){
-            memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
-            memeImage.setImageBitmap(memeImageBitmap);
+            mMemeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
+            memeImage.setImageBitmap(mMemeImageBitmap);
         }
         if(picKey == 0){
             String newString = intent.getStringExtra("CameraPhotoUri");
-            memeImageBitmap = getBitmapFromUri(newString);
-            memeImage.setImageBitmap(memeImageBitmap);
+            mMemeImageBitmap = getBitmapFromUri(newString);
+            memeImage.setImageBitmap(mMemeImageBitmap);
         }
         if(picKey == 3){
             loadStockImage();
@@ -164,6 +157,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         fragmentAdapter = new FragmentAdapter(this);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DragMemeWrapper(mMemeImageBitmap));
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DrawMemeWrapper());
         mRecyclerView.setAdapter(fragmentAdapter);
@@ -200,7 +194,13 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     @Override
     public void setEditMemeAdapter(RecyclerView.Adapter editMemeAdapter) {
-        mEditAdapter = editMemeAdapter;
+        if(editMemeAdapter != null) {
+            mEditAdapter = editMemeAdapter;
+            mEditMemeButton.setEnabled(true);
+        }else{
+            System.out.println("no adapter");
+            mEditMemeButton.setEnabled(false);
+        }
     }
 
     @Override
