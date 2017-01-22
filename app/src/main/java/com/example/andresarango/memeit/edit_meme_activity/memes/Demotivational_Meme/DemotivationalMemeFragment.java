@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-package com.example.andresarango.memeit.edit_meme_activity.memes.demotivational_Meme;
-=======
 package com.example.andresarango.memeit.edit_meme_activity.memes.demotivational_meme;
->>>>>>> master
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Paint;
