@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.provider.MediaStore;
+=======
+>>>>>>> 96da302803d347e40b5e6804f962d702262e8d54
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -126,5 +129,13 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     @Override
     public void swapFragment(Fragment memeFragment) {
         startFragment(null, memeFragment);
+    }
+
+    private void showPicture() {
+        Bitmap picture = getIntent().getParcelableExtra("BitmapCamera");
+        Uri pictureUri = Uri.parse(getIntent().getStringExtra("CameraPhotoUri"));
+        if (picture != null) {
+            memeImage.setImageBitmap(picture);
+        }
     }
 }
