@@ -14,29 +14,27 @@ import java.util.List;
  * Created by leighdouglas on 1/21/17.
  */
 
-public class DrawAdapter extends RecyclerView.Adapter<DrawViewHolder> {
+public class DrawAdapter extends RecyclerView.Adapter<EditDrawViewHolder> {
 
+    private EditDrawViewHolder.Listener listener;
     private List<Integer> buttons = new ArrayList<>();
 
 
-    public DrawAdapter(List<Integer> buttons){
-        this.buttons = buttons;
-    }
-
-    public DrawAdapter(){
+    public DrawAdapter(EditDrawViewHolder.Listener listener){
+        this.listener = listener;
         for (int i = 0; i < 3; i++){
             buttons.add(i);
         }
     }
 
     @Override
-    public DrawViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EditDrawViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.draw_viewholder, parent, false);
-        return new DrawViewHolder(view);
+        return new EditDrawViewHolder(view, listener);
     }
 
     @Override
-    public void onBindViewHolder(DrawViewHolder holder, int position) {
+    public void onBindViewHolder(EditDrawViewHolder holder, int position) {
         int i = buttons.get(position);
         holder.bind(i);
     }

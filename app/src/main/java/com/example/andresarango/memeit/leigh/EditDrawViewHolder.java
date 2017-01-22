@@ -10,12 +10,19 @@ import com.example.andresarango.memeit.R;
  * Created by leighdouglas on 1/21/17.
  */
 
-public class DrawViewHolder extends RecyclerView.ViewHolder {
+public class EditDrawViewHolder extends RecyclerView.ViewHolder {
+    Listener listener;
     ImageView buttonImage;
 
-    public DrawViewHolder(View itemView) {
+    public EditDrawViewHolder(View itemView) {
+        this(itemView, null);
+    }
+
+    public EditDrawViewHolder(View itemView, Listener listener){
         super(itemView);
         buttonImage = (ImageView) itemView.findViewById(R.id.drawing_icon);
+        this.listener = listener;
+
     }
 
     public void bind(int i){
@@ -25,7 +32,6 @@ public class DrawViewHolder extends RecyclerView.ViewHolder {
                 buttonImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DrawingView.drawingView.undo();
                     }
                 });
                 break;
@@ -43,9 +49,14 @@ public class DrawViewHolder extends RecyclerView.ViewHolder {
                 buttonImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        listener.undo();
 
                     }
                 });
         }
+    }
+
+    public interface Listener{
+        void undo();
     }
 }

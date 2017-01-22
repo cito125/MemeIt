@@ -15,10 +15,17 @@ import com.example.andresarango.memeit.R;
 
 public class DrawingMemeFragment extends Fragment {
 
+    private DrawingView mDrawingView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drawing_fragment, container, false);
+        mDrawingView = (DrawingView) view.findViewById(R.id.drawing_view);
         return view;
+    }
+
+    public DrawingView getmDrawingView() {
+        return mDrawingView;
     }
 }

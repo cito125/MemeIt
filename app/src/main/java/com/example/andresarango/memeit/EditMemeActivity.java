@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -28,6 +29,9 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListe
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeWrapper;
+import com.example.andresarango.memeit.leigh.DrawMemeWrapper;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -40,6 +44,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
     private Button mChooseMemeButton;
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
+    private String memeURL;
     private Toolbar editMemeToolbar;
     private RelativeLayout rl;
 
@@ -60,6 +65,21 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 //                .commit();
 
         initialize(savedInstanceState);
+
+        Intent intent = getIntent();
+        int picKey = intent.getIntExtra("TypeOfPicture",5);
+        if(picKey == 1){
+            memeImageBitmap = getBitmapFromUri(getIntent().getStringExtra("ImageString"));
+            memeImage.setImageBitmap(memeImageBitmap);
+        }
+        if(picKey == 0){
+            String newString = intent.getStringExtra("CameraPhotoUri");
+            memeImageBitmap = getBitmapFromUri(newString);
+            memeImage.setImageBitmap(memeImageBitmap);
+        }
+        if(picKey == 3){
+            loadStockImage();
+        }
     }
 
     private Bitmap getBitmapFromUri(String imageUriString) {
@@ -142,6 +162,8 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         fragmentAdapter = new FragmentAdapter(this);
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DrawMemeWrapper());
         mRecyclerView.setAdapter(fragmentAdapter);
         mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }
@@ -184,11 +206,12 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         startFragment(null, memeFragment);
     }
 
-    private void showPicture() {
-        Bitmap picture = getIntent().getParcelableExtra("BitmapCamera");
-        Uri pictureUri = Uri.parse(getIntent().getStringExtra("CameraPhotoUri"));
-        if (picture != null) {
-            memeImage.setImageBitmap(picture);
-        }
+
+    private void loadStockImage() {
+        Intent intent = getIntent();
+        memeURL = intent.getStringExtra("urlMe");
+        Picasso.with(this)
+                .load(memeURL)
+                .into(memeImage);
     }
 }

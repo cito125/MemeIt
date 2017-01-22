@@ -32,8 +32,9 @@ public abstract class EditorViewHolder extends RecyclerView.ViewHolder implement
 
     @Override
     public void onClick(View view) {
-        mListener.setEditMemeAdapter(getAdapter());
         mListener.swapFragment(getMemeFragment());
+        mListener.setEditMemeAdapter(getAdapter());
+
     }
 
     public interface Listener {
