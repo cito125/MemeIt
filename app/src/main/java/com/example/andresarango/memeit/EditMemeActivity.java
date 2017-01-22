@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,14 +20,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.andresarango.memeit.edit_meme_activity.memes.FragmentAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.memes.VanillaMemeListener;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
 import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
-import com.example.andresarango.memeit.edit_meme_activity.memes.Expectation_Meme.ExpectationMemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_Meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.leigh.DrawMemeWrapper;
 import com.squareup.picasso.Picasso;
 
