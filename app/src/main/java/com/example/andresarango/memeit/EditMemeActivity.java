@@ -29,18 +29,18 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.drag_meme.DragMe
 import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme.ExpectationMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
-import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeViewHolder;
 import com.example.andresarango.memeit.edit_meme_activity.memes.draw_meme.DrawMemeWrapper;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-public class EditMemeActivity extends AppCompatActivity implements EditorViewHolder.Listener {
+public class EditMemeActivity extends AppCompatActivity implements MemeViewHolder.Listener,MemeFragment.Listener {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter fragmentAdapter;
     private ImageView memeImage;
-    private Button mNextActivityButton;
     private Button mChooseMemeButton;
     private Button mEditMemeButton;
     private RecyclerView.Adapter mEditAdapter;
@@ -88,7 +88,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
 
     private void initialize(Bundle savedInstanceState) {
         memeImage = (ImageView) findViewById(R.id.meme_image);
-//        mNextActivityButton = (Button) findViewById(R.id.btn_next_activity);
+
         mChooseMemeButton = (Button) findViewById(R.id.btn_choose_meme);
         mEditMemeButton = (Button) findViewById(R.id.btn_edit_meme);
         mChooseMemeButton.setOnClickListener(onClickButton());
@@ -100,14 +100,7 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         setSupportActionBar(editMemeToolbar);
 
         rl = (RelativeLayout) findViewById(R.id.meme_to_be_saved);
-
-        VanillaMemeWrapper vanillaMemeWrapper = new VanillaMemeWrapper();
-
-        startFragment(savedInstanceState, vanillaMemeWrapper.getFragment());
-        setUpRecyclerView(vanillaMemeWrapper);
-
-
-//        mNextActivityButton.setOnClickListener(onClick());
+        setUpRecyclerView();
     }
 
     @Override
@@ -122,27 +115,24 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         switch (item.getItemId()) {
             case R.id.next:
 
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rl.setDrawingCacheEnabled(true);
-                        Bitmap b = rl.getDrawingCache();
+                Thread thread = new Thread(() -> {
+                    rl.setDrawingCacheEnabled(true);
+                    Bitmap b = rl.getDrawingCache();
 
-                        String uri = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), b, "image1", "an image");
-                        Log.d("This is the uri", uri);
+                    String uri = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), b, "image1", "an image");
+                    Log.d("This is the uri", uri);
 
-                        MemeDatabaseHelper memeDatabaseHelper = MemeDatabaseHelper.getInstance(getApplicationContext());
-                        SQLiteDatabase sqLiteDatabase = memeDatabaseHelper.getSQLiteDatabase(memeDatabaseHelper);
-                        memeDatabaseHelper.addMeme(new MemeURI(uri), sqLiteDatabase);
+                    MemeDatabaseHelper memeDatabaseHelper = MemeDatabaseHelper.getInstance(getApplicationContext());
+                    SQLiteDatabase sqLiteDatabase = memeDatabaseHelper.getSQLiteDatabase(memeDatabaseHelper);
+                    memeDatabaseHelper.addMeme(new MemeURI(uri), sqLiteDatabase);
 
-                        Intent intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("image/*");
-                        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri));  //need to add URI
-                        String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
-                        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                        startActivity(Intent.createChooser(intent, "Share via"));
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("image/*");
+                    intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uri));  //need to add URI
+                    String shareBody = "Put text here"; //This is optional not needed if you want to post something with image
+                    intent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                    startActivity(Intent.createChooser(intent, "Share via"));
 
-                    }
                 });
 
                 thread.start();
@@ -153,17 +143,16 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         }
     }
 
-    private void setUpRecyclerView(VanillaMemeWrapper vanillaMemeWrapper) {
+    private void setUpRecyclerView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.meme_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        fragmentAdapter = new FragmentAdapter(this);
-        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(vanillaMemeWrapper);
-        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DragMemeWrapper(mMemeImageBitmap));
+        fragmentAdapter = new FragmentAdapter<>(this);
+        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new VanillaMemeWrapper());
+//        ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DragMemeWrapper(mMemeImageBitmap));
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new ExpectationMemeWrapper());
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DrawMemeWrapper());
         ((FragmentAdapter) fragmentAdapter).addMemeWrapper(new DemotivationalMemeWrapper());
         mRecyclerView.setAdapter(fragmentAdapter);
-        mEditAdapter = new EditVanillaMemeAdapter((VanillaMemeListener) vanillaMemeWrapper.getFragment());
     }
 
     private View.OnClickListener onClickButton() {
@@ -187,13 +176,6 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         }
     }
 
-    private View.OnClickListener onClick() {
-        return view -> {
-            Intent intent = new Intent(getApplicationContext(), SaveMemeActivity.class);
-            startActivity(intent);
-        };
-    }
-
     @Override
     public void setEditMemeAdapter(RecyclerView.Adapter editMemeAdapter) {
         if(editMemeAdapter != null) {
@@ -205,17 +187,16 @@ public class EditMemeActivity extends AppCompatActivity implements EditorViewHol
         }
     }
 
-    @Override
-    public void swapFragment(Fragment memeFragment) {
-        startFragment(null, memeFragment);
-    }
-
-
     private void loadStockImage() {
         Intent intent = getIntent();
         memeURL = intent.getStringExtra("urlMe");
         Picasso.with(this)
                 .load(memeURL)
                 .into(memeImage);
+    }
+
+    @Override
+    public void swapFragment(MemeFragment memeFragment) {
+        startFragment(null, memeFragment);
     }
 }

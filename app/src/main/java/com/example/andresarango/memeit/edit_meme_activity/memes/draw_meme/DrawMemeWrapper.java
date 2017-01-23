@@ -5,7 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeViewHolder;
 import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
 
 /**
@@ -13,13 +14,10 @@ import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
  */
 
 public class DrawMemeWrapper implements MemeWrapper{
-
-    Fragment mDrawMemeFragment = new DrawingMemeFragment();
-
     @Override
-    public EditorViewHolder getViewHolder(ViewGroup parent, EditorViewHolder.Listener listener) {
+    public MemeViewHolder getViewHolder(ViewGroup parent, MemeFragment.Listener listener) {
         return new DrawMemeViewHolder(LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.viewholder_draw_meme,parent,false),listener,mDrawMemeFragment);
+                .inflate(R.layout.viewholder_draw_meme,parent,false),listener,DrawingMemeFragment.class);
     }
 }

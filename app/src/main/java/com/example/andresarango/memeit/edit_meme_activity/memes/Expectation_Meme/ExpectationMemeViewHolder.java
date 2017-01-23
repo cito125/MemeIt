@@ -3,19 +3,14 @@ package com.example.andresarango.memeit.edit_meme_activity.memes.expectation_mem
 import android.app.Fragment;
 import android.view.View;
 
-import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeViewHolder;
 
 /**
  * Created by jordansmith on 1/21/17.
  */
-public class ExpectationMemeViewHolder extends EditorViewHolder {
-
-
-    public ExpectationMemeViewHolder(View itemView) {
-        super(itemView);
-    }
-
-    public ExpectationMemeViewHolder(View view, Listener listener, Fragment memeFragment) {
+public class ExpectationMemeViewHolder extends MemeViewHolder {
+    public ExpectationMemeViewHolder(View view, MemeFragment.Listener listener, Class memeFragment) {
         super(view, listener, memeFragment);
     }
 }

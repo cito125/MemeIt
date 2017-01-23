@@ -4,7 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeViewHolder;
 import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
 
 /**
@@ -12,11 +13,9 @@ import com.example.andresarango.memeit.edit_meme_activity.utility.MemeWrapper;
  */
 
 public class DemotivationalMemeWrapper implements MemeWrapper {
-
-    DemotivationalMemeFragment demotivationalMemeFragment = new DemotivationalMemeFragment();
     @Override
-    public EditorViewHolder getViewHolder(ViewGroup parent, EditorViewHolder.Listener listener) {
+    public MemeViewHolder getViewHolder(ViewGroup parent, MemeFragment.Listener listener) {
         return new DemotivationalViewHolder(LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.viewholder_demotivational_meme,parent,false), listener, demotivationalMemeFragment);
+                .inflate(R.layout.viewholder_demotivational_meme,parent,false),listener,DemotivationalMemeFragment.class);
     }
 }

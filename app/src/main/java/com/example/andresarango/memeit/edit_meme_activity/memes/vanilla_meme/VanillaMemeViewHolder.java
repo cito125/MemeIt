@@ -1,33 +1,17 @@
 package com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme;
 
-import android.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
-import com.example.andresarango.memeit.edit_meme_activity.utility.EditorViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeViewHolder;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
 
 /**
  * Created by andresarango on 1/20/17.
  */
 
-public class VanillaMemeViewHolder extends EditorViewHolder {
-    private VanillaMemeListener mVanillaLister;
-    @Override
-    public RecyclerView.Adapter getAdapter() {
-        System.out.println("yoooo");
-        return new EditVanillaMemeAdapter(mVanillaLister);
-    }
+public class VanillaMemeViewHolder extends MemeViewHolder {
 
-    public VanillaMemeViewHolder(View itemView) {
-        super(itemView);
-    }
-
-    public VanillaMemeViewHolder(View view, Listener listener, Fragment memeFragment) {
+    public VanillaMemeViewHolder(View view, MemeFragment.Listener listener, Class memeFragment) {
         super(view, listener, memeFragment);
-        if(memeFragment instanceof VanillaMemeListener){
-            mVanillaLister = (VanillaMemeListener) memeFragment;
-        }
     }
 
     @Override
