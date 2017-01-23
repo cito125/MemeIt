@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.model.imgflip_json;
+package com.example.andresarango.memeit.modello;
 
 import java.util.List;
 

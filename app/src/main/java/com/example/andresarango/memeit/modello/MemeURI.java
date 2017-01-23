@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit;
+package com.example.andresarango.memeit.modello;
 
 /**
  * Created by leighdouglas on 1/21/17.

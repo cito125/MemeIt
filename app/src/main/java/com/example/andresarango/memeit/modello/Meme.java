@@ -1,4 +1,4 @@
-package com.example.andresarango.memeit.model.imgflip_json;
+package com.example.andresarango.memeit.modello;
 
 /**
  * Created by helenchan on 1/19/17.

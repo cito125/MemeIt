@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.example.andresarango.memeit.EditMemeActivity;
 import com.example.andresarango.memeit.R;
-import com.example.andresarango.memeit.model.imgflip_json.Meme;
+import com.example.andresarango.memeit.modello.Meme;
 import com.squareup.picasso.Picasso;
 
 /**

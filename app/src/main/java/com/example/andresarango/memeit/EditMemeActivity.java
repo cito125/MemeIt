@@ -30,6 +30,7 @@ import com.example.andresarango.memeit.edit_meme_activity.memes.expectation_meme
 import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.VanillaMemeWrapper;
 import com.example.andresarango.memeit.edit_meme_activity.utility.MemeViewHolder;
 import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
+import com.example.andresarango.memeit.modello.MemeURI;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;

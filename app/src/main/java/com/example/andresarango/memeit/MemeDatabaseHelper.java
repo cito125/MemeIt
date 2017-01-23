@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.andresarango.memeit.modello.MemeURI;
+
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 /**
