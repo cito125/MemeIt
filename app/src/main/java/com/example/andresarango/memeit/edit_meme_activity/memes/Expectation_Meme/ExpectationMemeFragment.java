@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.andresarango.memeit.R;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by jordansmith on 1/20/17.
  */
 
-public class ExpectationMemeFragment extends android.app.Fragment implements View.OnClickListener {
+public class ExpectationMemeFragment extends MemeFragment implements View.OnClickListener {
     View rootView;
     Button imageA;
     Button imageB;
@@ -44,36 +45,18 @@ public class ExpectationMemeFragment extends android.app.Fragment implements Vie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_expectation_meme, container, false);
         initializations(rootView);
-
-//        Bundle bundle = getArguments();
-//        String passedUriString = bundle.getString("GalleryImage");
-//        Uri uri = Uri.parse(passedUriString);
-
-//
-//        try {
-//            Bitmap bitmap = MediaStore.Images.Media.getBitmap( getActivity().getContentResolver(), uri );
-//            Drawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
-//            imageA.setBackgroundDrawable(bitmapDrawable);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
         areButtonsSet();
-
-        editText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                // If the event is a key-down event on the "enter" button
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
-                        (i == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-                    titleTextView.setText(editText.getText());
-                    editText.setVisibility(View.GONE);
-                    titleTextView.setVisibility(View.VISIBLE);
-                    return true;
-                }
-                return false;
+        editText.setOnKeyListener((view, i, keyEvent) -> {
+            // If the event is a key-down event on the "enter" button
+            if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (i == KeyEvent.KEYCODE_ENTER)) {
+                // Perform action on key press
+                titleTextView.setText(editText.getText());
+                editText.setVisibility(View.GONE);
+                titleTextView.setVisibility(View.VISIBLE);
+                return true;
             }
+            return false;
         });
 
 

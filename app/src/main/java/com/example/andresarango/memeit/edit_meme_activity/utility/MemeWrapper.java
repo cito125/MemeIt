@@ -6,5 +6,6 @@ import android.view.ViewGroup;
  * Created by andresarango on 1/20/17.
  */
 public interface MemeWrapper {
-    EditorViewHolder getViewHolder(ViewGroup parent,EditorViewHolder.Listener listener);
+
+    MemeViewHolder getViewHolder(ViewGroup parent, MemeFragment.Listener listener);
 }

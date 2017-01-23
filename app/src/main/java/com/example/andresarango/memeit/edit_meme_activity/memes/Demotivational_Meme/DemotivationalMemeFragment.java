@@ -12,12 +12,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.andresarango.memeit.R;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
 
 /**
  * Created by helenchan on 1/21/17.
  */
 
-public class DemotivationalMemeFragment extends Fragment {
+public class DemotivationalMemeFragment extends MemeFragment {
     private static final int MAX_NUM_OF_LETTERS_TITLE = 20;
     private static final int MAX_NUM_OF_LETTERS = 45;
     private View mRoot;

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.andresarango.memeit.R;
+import com.example.andresarango.memeit.edit_meme_activity.memes.vanilla_meme.adapter.EditVanillaMemeAdapter;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
 import com.example.andresarango.memeit.view.MobileEditText;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
@@ -22,7 +24,7 @@ import java.util.List;
  * Created by andresarango on 1/20/17.
  */
 
-public class VanilleMemeFragment extends Fragment implements VanillaMemeListener {
+public class VanilleMemeFragment extends MemeFragment implements VanillaMemeListener {
     List<MobileEditText> mMobileTextViewList = new ArrayList<>();
     private float dX;
     private float dY;
@@ -31,8 +33,10 @@ public class VanilleMemeFragment extends Fragment implements VanillaMemeListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_vanilla_meme,container,false);
+        mListener.setEditMemeAdapter(new EditVanillaMemeAdapter(this));
         return rootView;
     }
+
 
     @Override
     public void addMobileEditText() {

@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.andresarango.memeit.R;
+import com.example.andresarango.memeit.edit_meme_activity.utility.MemeFragment;
 
 /**
  * Created by leighdouglas on 1/20/17.
  */
 
-public class DrawingMemeFragment extends Fragment {
+public class DrawingMemeFragment extends MemeFragment {
 
     private DrawingView mDrawingView;
 
@@ -22,10 +23,7 @@ public class DrawingMemeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.drawing_fragment, container, false);
         mDrawingView = (DrawingView) view.findViewById(R.id.drawing_view);
+        mListener.setEditMemeAdapter(new DrawAdapter(mDrawingView));
         return view;
-    }
-
-    public DrawingView getmDrawingView() {
-        return mDrawingView;
     }
 }
